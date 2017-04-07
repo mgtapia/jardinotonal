@@ -1,0 +1,38 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block title %}Registrar Administrador{% endblock %}
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  <body class="bg-otonal">
+    <img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/>
+    <div class="cotizador--fixed">
+      <div class="formulario__datos formulario__login">
+	    <h2>Registro</h2>
+	    <h6>Crear nuevo administrador - <a href="{{path('innobis_users')}}">Regresar</a></h6>	
+      	{{ form_start(form, {'attr': {'role':'form'}}) }}
+	    <fieldset>
+	      	<div class="form-group">
+	      		{{ form_widget(form.firstname, {'attr':{'placeholder':'Nombre'}}) }}
+	      		<span class="text-danger">{{ form_errors(form.firstname) }}</span>
+	      	</div>
+	      	<div class="form-group">
+	      		{{ form_widget(form.lastname, {'attr':{'placeholder':'Apellido'}}) }}
+	      		<span class="text-danger">{{ form_errors(form.lastname) }}</span>
+	      	</div>
+	      	<div class="form-group">
+	      		{{ form_widget(form.email, {'attr':{'placeholder':'Correo Electrónico'}}) }}
+	      		<span class="text-danger">{{ form_errors(form.email) }}</span>
+	      	</div>
+	      	<div class="form-group">
+	      		{{ form_widget(form.password, {'attr':{'placeholder':'Contraseña'}}) }}
+	      		<span class="text-danger">{{ form_errors(form.password) }}</span>
+	      	</div>
+	    </fieldset>
+	    <p>{{ form_widget(form.save, {'attr':{'class':'btn','label':'Registrarse'}}) }}</p>
+      	{{ form_end(form) }}
+      </div>
+    </div>
+  </body>
+{% endif %}
+{% endblock %}
