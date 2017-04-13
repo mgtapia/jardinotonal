@@ -2,6 +2,9 @@ innobis_homepage:
     path:     /
     defaults: { _controller: innobisBundle:Default:index }
 
+innobis_admin:
+    path:     /admin
+    defaults: { _controller: innobisBundle:Default:admin }
 innobis_users:
     path:     /users
     defaults: { _controller: innobisBundle:Default:users }
@@ -16,6 +19,32 @@ innobis_delete:
     path:     /delete/{id}
     defaults: { _controller: innobisBundle:Default:delete }
     methods: [POST, DELETE]
+innobis_client:
+    path:     /client/{id}
+    defaults: { _controller: innobisBundle:Default:client }
+
+innobis_check:
+    path:   /check
+    defaults: { _controller: innobisBundle:Security:check }
+innobis_logout:
+    path:   /logout
+
+innobis_clients:
+    path:     /clients
+    defaults: { _controller: innobisBundle:Security:clients }
+
+innobis_observation:
+    path:     /observation
+    defaults: { _controller: innobisBundle:Default:observation }
+    methods: POST
+innobis_create_client:
+    path:     /create_client
+    defaults: { _controller: innobisBundle:Security:create }
+    methods: POST
+innobis_enter:
+    path:     /home
+    defaults: { _controller: innobisBundle:Default:enter }
+    methods: POST
 
 innobis_redirect_signup:
     path:     /create
@@ -23,9 +52,31 @@ innobis_redirect_signup:
         _controller: innobisBundle:Default:signup
         path: /signup
         permanent: true
+innobis_redirect_client:
+    path:     /create_client
+    defaults:
+        _controller: innobisBundle:Security:clients
+        path: /clients
+        permanent: true
+innobis_redirect_enter:
+    path:     /home
+    defaults:
+        _controller: innobisBundle:Default:index
+        path: /
+        permanent: true
 
-innobis_check:
-    path:   /check
-    defaults: { _controller: innobisBundle:Security:check }
-innobis_logout:
-    path:   /logout
+innobis_client_list:
+    path:     /client_list
+    defaults: { _controller: innobisBundle:Default:clientlist }
+innobis_observation_list:
+    path:     /observation_list
+    defaults: { _controller: innobisBundle:Default:observationlist }
+innobis_observation_excel:
+    path:     /observation_excel
+    defaults: { _controller: innobisBundle:Default:observationexcel }
+innobis_obs:
+    path:     /observation/{id}
+    defaults: { _controller: innobisBundle:Default:obsid }
+innobis_deptos:
+    path:     /deptos
+    defaults: { _controller: innobisBundle:Default:deptos }

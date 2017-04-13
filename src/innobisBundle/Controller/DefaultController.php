@@ -6,21 +6,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use innobisBundle\Entity\Users;
 use innobisBundle\Form\UsersType;
+use innobisBundle\Entity\Clientes;
+use innobisBundle\Form\EnterType;
+use innobisBundle\Entity\Viviendas;
+use innobisBundle\Entity\RecintoVivienda;
+use innobisBundle\Entity\Reclamos;
+use innobisBundle\Form\ReclamosType;
 
 class DefaultController extends Controller
 {
 	public function indexAction()
     {
-        $auth = $this->get('security.authentication_utils');
-        $error = $auth->getLastAuthenticationError();
-        $lastUsername = $auth->getLastUsername();
-
-        return $this->render('innobisBundle:Default:index.html.twig', array('last_username'=>$lastUsername,'error'=>$error));
+        $user = new Clientes();
+        $form = $this->enterCreateForm($user);
+        return $this->render('innobisBundle:Default:index.html.twig', array('form'=>$form->createView()));
     }
  	public function usersAction()
     {
     	$users = $this->getDoctrine()->getRepository("innobisBundle:Users")->findAll();
     	return $this->render('innobisBundle:Default:users.html.twig', array("users"=>$users));
+    }
+    public function adminAction()
+    {
+        $auth = $this->get('security.authentication_utils');
+        $error = $auth->getLastAuthenticationError();
+        $lastUsername = $auth->getLastUsername();
+
+        return $this->render('innobisBundle:Default:admin.html.twig', array('last_username'=>$lastUsername,'error'=>$error));
     }
  	public function signupAction()
     {
@@ -60,5 +72,97 @@ class DefaultController extends Controller
         }
 
        return $this->render('innobisBundle:Default:signup.html.twig', array('form'=>$form->createView()));
+    }
+    public function clientAction($id)
+    {
+        return $this->render('innobisBundle:Default:client.html.twig', array('id'=>$id));
+    }  
+    private function enterCreateForm(Clientes $entity) 
+    {
+        $form = $this->createForm(new EnterType(), $entity, array(
+                'action' => $this->generateUrl('innobis_enter'),
+                'method' => 'POST'
+            ));
+        return $form;
+    }
+    public function enterAction(Request $request)
+    {
+        $user = new Clientes();
+        $forma = $this->enterCreateForm($user);
+        $forma->handleRequest($request);
+        $rut = $forma->get('rut')->getData();
+
+        $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
+        $viviendas = $this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll();
+        $recintos = $this->getDoctrine()->getRepository("innobisBundle:RecintoVivienda")->findAll();
+        $check = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findByRut($rut);
+
+        if ($check) { $check = 'Si'; } else { $check = 'No'; }
+
+        $reclamos = new Reclamos();
+        $form = $this->createReclamosForm($reclamos);
+        
+        return $this->render('innobisBundle:Default:client.html.twig',  array('id'=>$rut, 'form'=>$form->createView(), 
+           'check'=>$check, 'clientes'=>$clientes, 'recintos'=>$recintos, 'viviendas'=>$viviendas));
+    }
+    private function createReclamosForm(Reclamos $entity) 
+    {
+        $form = $this->createForm(new ReclamosType(), $entity, array(
+                'action' => $this->generateUrl('innobis_observation'),
+                'method' => 'POST'
+            ));
+        return $form;
+    }
+    public function observationAction(Request $request)
+    {
+        $reclamo = new Reclamos();
+        $form = $this->createReclamosForm($reclamo);
+        $form->handleRequest($request);
+
+        if($form->isValid())
+        {
+            $reclamo->setFechaReclamo(new \DateTime('now'));
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($reclamo);
+            $em->flush();
+
+            $this->addFlash('mensaje','Su observación ha sido enviada');   
+        }
+
+        $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
+        $viviendas = $this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll();
+        $recintos = $this->getDoctrine()->getRepository("innobisBundle:RecintoVivienda")->findAll();
+        $check = 'Si';
+
+        return $this->render('innobisBundle:Default:client.html.twig', 
+            array('id'=>$form->get('rut')->getData(), 'form'=>$form->createView(), 
+           'check'=>$check, 'clientes'=>$clientes, 'recintos'=>$recintos, 'viviendas'=>$viviendas));
+    }
+    public function clientlistAction()
+    {
+        $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
+        return $this->render('innobisBundle:Default:clientlist.html.twig', array("clientes"=>$clientes));
+    }
+    public function observationlistAction()
+    {
+        $reclamos = $this->getDoctrine()->getRepository("innobisBundle:Reclamos")->findAll();
+        return $this->render('innobisBundle:Default:observations.html.twig', array("reclamos"=>$reclamos));
+    }
+    public function observationexcelAction()
+    {
+        $reclamos = $this->getDoctrine()->getRepository("innobisBundle:Reclamos")->findAll();
+        return $this->render('innobisBundle:Default:excel.html.twig', array("reclamos"=>$reclamos));
+    }
+    public function obsidAction($id)
+    {
+        $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
+        $reclamos = $this->getDoctrine()->getRepository("innobisBundle:Reclamos")->findAll();
+        return $this->render('innobisBundle:Default:observation.html.twig', array("id"=>$id, "reclamos"=>$reclamos, "clientes"=>$clientes));
+    }
+    public function deptosAction()
+    {
+        $viviendas = $this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll();
+        $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
+        return $this->render('innobisBundle:Default:deptos.html.twig', array("deptos"=>$viviendas, "clientes"=>$clientes));
     }
 }

@@ -1,0 +1,36 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block body %}
+	<div class="well">
+	<table class="table table-striped table-hover">
+	  	<thead>
+	      	<tr style="color:black">
+				<th>#</th>
+				<th>Rut</th>
+				<th>Departamento</th>
+				<th>Torre</th>
+				<th>Recinto</th>
+				<th>Observación</th>
+				<th>Fecha Reclamo</th>
+				<th>Fecha Solucion</th>
+				<th>Gravedad</th>
+			</tr>
+		</thead>
+		<tbody style="background:rgba(220,220,220,.95)">
+		{% for reclamo in reclamos %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ reclamo.rut }}</td>
+				<td>{{ reclamo.departamento }}</td>
+				<td>{{ reclamo.torre }}</td>
+				<td>{{ reclamo.recinto }}</td>
+				<td>{{ reclamo.observacion }}</td>
+				<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
+				<td>{{ reclamo.fechaSolucion|date('d-m-Y') }}</td>
+				<td>{{ reclamo.gravedad }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	  </table>
+	</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="innobisBundle\Entity\RecintoVivienda" table="recinto_vivienda">
+    <id name="recinto" type="text" column="recinto" length="65535"/>
+    <id name="tipo" type="integer" column="tipo"/>
+  </entity>
+</doctrine-mapping>

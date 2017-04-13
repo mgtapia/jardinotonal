@@ -229,4 +229,3 @@ class Users implements AdvancedUserInterface, \Serializable
         return true;
     }
 }
-

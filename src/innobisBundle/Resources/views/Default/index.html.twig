@@ -1,9 +1,14 @@
 {% extends 'innobisBundle::main.html.twig' %}
 
 {% block body %}
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {{ include('innobisBundle:Default:menu.html.twig') }}
+    <body class="bg-otonal">
+        <img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/>
+    </body>
+  {% else %}
   <div>
   {% for flashMessage in app.session.flashbag.get('mensaje') %}
-    <br/>
     <div class="alert alert-success" role="alert">
       <div class="container">{{ flashMessage }}</div>
     </div>
@@ -11,19 +16,20 @@
   <body class="bg-otonal">
     <img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/>
     <div class="cotizador--fixed">
-      <form action="{{path('innobis_check')}}" method="post" class="formulario__datos formulario__login">
+      <div class="formulario__datos formulario__login">
           <h2>Inicia Sesión</h2>
-          <h6>¿Eres nuevo aquí? <a href="{{path('innobis_signup')}}">Regístrate</a></h6>
-       		{% if error %}
-  				<div class="text-dange">
-  					<p><strong>{{ error.messageKey }}</strong></p>
-  				</div>	
-       		{% endif %}
-          <input id="emailHolder" type="email" placeholder="Email" name="_email" value="{{last_username}}" required autofocus/>
-          <input id="passHolder" type="password" placeholder="Contraseña" name="_password" required autofocus/>
-          <input type="hidden" name="_target_path" value="innobis_users"/>
-          <button type="submit" class="submit__btn">Ingresar</button>
-        </form> 
+          <h6>Acceso Propietarios</h6>
+          {{ form_start(form, {'attr': {'role':'form'}}) }}
+          <fieldset>
+               <div class="form-group">
+                {{ form_widget(form.rut, {'attr':{'placeholder':'Ingresa con tu Rut'}}) }}
+                <span class="text-danger">{{ form_errors(form.rut) }}</span>
+              </div>
+          </fieldset>
+          <p>{{ form_widget(form.save, {'attr':{'class':'btn','label':'Ingresar'}}) }}</p>
+        {{ form_end(form) }}
+      </div>
     </div>
   </body>
+{% endif %}
 {% endblock %}

@@ -10,13 +10,6 @@
     padding-top: 150px;
     width: 150px;
 }
-.fixed-otonal
-{
-    background-attachment: fixed;
-    background-image: url('http://jardinotonal.cl/img/bg-contact.jpg');
-    background-position: center;
-    background-size: cover;
-}
 .formulario__login h2, .formulario__login h6
 {
 	color: #026537;
@@ -45,4 +38,40 @@
 {
   	background-color: #fff;
   	color: #026537;
+}
+.fixed-otonal
+{
+    background-attachment: fixed;
+    background-image: url('http://jardinotonal.cl/img/bg-contact.jpg');
+    background-position: center;
+    background-size: cover;
+}
+.bg-info2
+{
+    background-attachment: fixed;
+    background-image: url('http://jardinotonal.cl/img/slide-info2.jpg');
+    background-position: center;
+    background-size: cover;
+}
+.bg-info3
+{
+    background-attachment: fixed;
+    background-image: url('http://jardinotonal.cl/img/slide-info3.jpg');
+    background-position: center;
+    background-size: cover;
+}
+.hh
+{
+    height: 200px !important;
+    resize: vertical;
+}
+.message-alert
+{
+    position: absolute;
+    top:60px;
+    width: 265px;
+}
+a.link, a.link:hover, a.link:focus
+{
+    cursor:pointer;
 }

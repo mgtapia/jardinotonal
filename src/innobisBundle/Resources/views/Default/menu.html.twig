@@ -15,7 +15,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="{{ path('innobis_users') }}">Administradores</a></li>
-        <li><a href="{{ path('innobis_signup') }}">Registro</a></li>
+        <li><a href="{{ path('innobis_signup') }}">Registro Admin</a></li>
+        <li><a href="{{ path('innobis_client_list') }}">Clientes</a></li>
+        <li><a href="{{ path('innobis_clients') }}">Registro Clientes</a></li>
+        <li><a href="{{ path('innobis_observation_list') }}">Reclamos</a></li>
+        <li><a href="{{ path('innobis_deptos') }}">Viviendas</a></li>
+        <li><a href="{{path('innobis_observation_excel')}}">Vista Excel</a></li>
       </ul>     
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><a>{{ app.user.firstname }} {{ app.user.lastname }}</a></li>

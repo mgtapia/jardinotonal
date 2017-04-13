@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UsersType extends AbstractType
+class EnterType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,8 @@ class UsersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email','email')
-            ->add('password','password')
-            ->add('save','submit', array('label'=>'Crear'))
+            ->add('rut')
+            ->add('save','submit', array('label'=>'Ingresar'))
         ;
     }
     
@@ -29,14 +26,7 @@ class UsersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'innobisBundle\Entity\Users'
+            'data_class' => 'innobisBundle\Entity\Clientes'
         ));
-    }
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'users';
     }
 }
