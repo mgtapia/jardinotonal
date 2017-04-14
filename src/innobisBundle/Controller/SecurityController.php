@@ -5,6 +5,7 @@ namespace innobisBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use innobisBundle\Entity\Clientes;
+use innobisBundle\Entity\Viviendas;
 use innobisBundle\Form\ClientesType;
 
 class SecurityController extends Controller
@@ -19,8 +20,9 @@ class SecurityController extends Controller
 	public function clientsAction()
     {
         $user = new Clientes();
+        $viviendas = $this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll();
         $form = $this->createCreateForm($user);
-    	return $this->render('innobisBundle:Default:clients.html.twig', array('form'=>$form->createView()));
+    	return $this->render('innobisBundle:Default:clients.html.twig', array('form'=>$form->createView(),'viviendas'=>$viviendas));
     }
     private function createCreateForm(Clientes $entity) 
     {

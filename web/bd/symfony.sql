@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-04-2017 a las 02:16:04
+-- Tiempo de generación: 13-04-2017 a las 22:36:51
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -304,7 +304,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
 (1, 'Matías', 'Tapia', 'mgtapia@uc.cl', '$2y$12$Am0E2wBvQsAGH1INJBdfJe3uBtri847hPFnduLvDk33wDwzZUGnw6'),
-(2, 'Pablo', 'Rios', 'perios@uc.cl', '$2y$12$BKnAgL.GoanXfueZfA9CLuWF7aiZS6ESukHaZvYveEE3SqU.N48vS');
+(2, 'Pablo', 'Rios', 'perios@uc.cl', '$2y$12$BKnAgL.GoanXfueZfA9CLuWF7aiZS6ESukHaZvYveEE3SqU.N48vS'),
+(25, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq'),
+(26, 'Ricardo', 'Oyarzun', 'richi@uc.cl', '$2y$12$N3NkEKGXkedZMExIDonN1.ebJi5053mc3b//AhVjAVhcwGUAXh0L.');
 
 -- --------------------------------------------------------
 
@@ -415,7 +417,7 @@ ALTER TABLE `reclamos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

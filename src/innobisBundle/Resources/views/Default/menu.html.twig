@@ -10,22 +10,32 @@
       </button>
       <a class="navbar-brand" href="#">Jardín Otoñal</a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="{{ path('innobis_users') }}">Administradores</a></li>
-        <li><a href="{{ path('innobis_signup') }}">Registro Admin</a></li>
-        <li><a href="{{ path('innobis_client_list') }}">Clientes</a></li>
-        <li><a href="{{ path('innobis_clients') }}">Registro Clientes</a></li>
-        <li><a href="{{ path('innobis_observation_list') }}">Reclamos</a></li>
-        <li><a href="{{ path('innobis_deptos') }}">Viviendas</a></li>
-        <li><a href="{{path('innobis_observation_excel')}}">Vista Excel</a></li>
+        <li><a></a></li>
+        <li><a href="{{ path('innobis_client_list') }}"><i class="glyphicon glyphicon-user"></i> Clientes</a></li>
+        <li><a href="{{ path('innobis_deptos') }}"><i class="glyphicon glyphicon-home"></i> Deptos</a></li>
+        <li><a href="{{ path('innobis_observation_list') }}"><i class="glyphicon glyphicon-list-alt"></i> Reclamos</a></li>
+        <li><a href="{{ path('innobis_clients') }}"><i class="glyphicon glyphicon-edit"></i> Ventas</a></li>
       </ul>     
       <ul class="nav navbar-nav navbar-right">
+        <li><a>Administrador</a></li>
         <li class="active"><a>{{ app.user.firstname }} {{ app.user.lastname }}</a></li>
-        <li><a href="{{ path('innobis_logout') }}">Cerrar Sesión</a></li>
+        <li><a href="{{ path('innobis_users') }}"><i class="glyphicon glyphicon-th-list"></i></a></li>
+        <li><a href="{{ path('innobis_signup') }}"><i class="glyphicon glyphicon-plus"></i></a></li>
+        <li><a href="{{ path('innobis_logout') }}"><i class="glyphicon glyphicon-log-out"></i></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success message-alert" role="alert">
+          <div class="container">{{ flashMessage }}</div>
+          <script>
+            setTimeout("$('.message-alert').fadeIn('slow')", 1000);
+          setTimeout("$('.message-alert').fadeOut('slow')", 4000);
+        </script>
+        </div>
+      {% endfor %}

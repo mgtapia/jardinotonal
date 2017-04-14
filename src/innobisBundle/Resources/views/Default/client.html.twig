@@ -19,9 +19,10 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a>Observaciones</a></li>
+		        <li><a></a></li>
 		      </ul>     
 		      <ul class="nav navbar-nav navbar-right">
+        		<li><a>Propietario</a></li>
 		      	{% for vivienda in viviendas %}
 					{% if vivienda.rutDueno == id %}
 						<li><a>Departamento {{vivienda.departamento}} {{vivienda.torre}}</a></li>
@@ -32,21 +33,11 @@
 						<li class="active"><a>{{cliente.nombre}}</a></li>
 					{% endif %}
 				{% endfor %}		        
-		        <li><a href="{{ path('innobis_homepage') }}">Salir</a></li>
+		        <li><a href="{{ path('innobis_homepage') }}"><i class="glyphicon glyphicon-log-out"></i></a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
-
-		{% for flashMessage in app.session.flashbag.get('mensaje') %}
-		    <div class="alert alert-success message-alert" role="alert">
-		      <div class="container">{{ flashMessage }}</div>
-		      <script>
-		      	setTimeout("$('.message-alert').fadeIn('slow')", 1000);
-			    setTimeout("$('.message-alert').fadeOut('slow')", 4000);
-			  </script>
-		    </div>
-		  {% endfor %}
 
 		<div class="Title text-center">
 		    <div class="clear2"></div><div class="clear2"></div><br/>

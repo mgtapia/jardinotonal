@@ -73,5 +73,14 @@
 }
 a.link, a.link:hover, a.link:focus
 {
-    cursor:pointer;
+    cursor: pointer;
+}
+a .ho
+{
+    display: none;
+    transition: all 3s ease;
+}
+a:hover .ho
+{
+    display: inline;
 }
