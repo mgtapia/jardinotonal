@@ -84,3 +84,11 @@ a:hover .ho
 {
     display: inline;
 }
+i.ok
+{
+    color: #026537;
+}
+i.time
+{
+    color: red;
+}

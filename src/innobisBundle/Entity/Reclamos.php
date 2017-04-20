@@ -47,6 +47,13 @@ class Reclamos
     private $torre;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="categoria", type="string", length=255)
+     */
+    private $categoria;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_reclamo", type="date")
@@ -61,11 +68,18 @@ class Reclamos
     private $fechaSolucion;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="gravedad", type="string", length=255)
+     * @ORM\Column(name="gravedad", type="integer")
      */
     private $gravedad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle", type="text")
+     */
+    private $detalle;
 
     /**
      * @var string
@@ -166,6 +180,30 @@ class Reclamos
     }
 
     /**
+     * Set categoria
+     *
+     * @param string $categoria
+     *
+     * @return Reclamos
+     */
+    public function setCategoria($categoria)
+    {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * Get categoria
+     *
+     * @return string
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
      * Set fechaReclamo
      *
      * @param \DateTime $fechaReclamo
@@ -216,7 +254,7 @@ class Reclamos
     /**
      * Set gravedad
      *
-     * @param string $gravedad
+     * @param int $gravedad
      *
      * @return Reclamos
      */
@@ -230,11 +268,35 @@ class Reclamos
     /**
      * Get gravedad
      *
-     * @return string
+     * @return int
      */
     public function getGravedad()
     {
         return $this->gravedad;
+    }
+
+    /**
+     * Set detalle
+     *
+     * @param string $detalle
+     *
+     * @return Reclamos
+     */
+    public function setDetalle($detalle)
+    {
+        $this->detalle = $detalle;
+
+        return $this;
+    }
+
+    /**
+     * Get detalle
+     *
+     * @return string
+     */
+    public function getDetalle()
+    {
+        return $this->detalle;
     }
 
     /**

@@ -12,6 +12,7 @@ use innobisBundle\Entity\Viviendas;
 use innobisBundle\Entity\RecintoVivienda;
 use innobisBundle\Entity\Reclamos;
 use innobisBundle\Form\ReclamosType;
+use innobisBundle\Form\SolutionType;
 
 class DefaultController extends Controller
 {
@@ -155,9 +156,22 @@ class DefaultController extends Controller
     }
     public function obsidAction($id)
     {
+        $em = $this->getDoctrine()->getEntityManager();
+        $update = $em->getRepository('innobisBundle:Reclamos')->find($id);
+        $form = $this->createForm(new SolutionType(), $update);
+
+        if($form->isValid())
+        {
+            $em->persist($update);
+            $em->flush();
+
+            $this->addFlash('mensaje','Observación Actualizada');   
+        }
+
         $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
         $reclamos = $this->getDoctrine()->getRepository("innobisBundle:Reclamos")->findAll();
-        return $this->render('innobisBundle:Default:observation.html.twig', array("id"=>$id, "reclamos"=>$reclamos, "clientes"=>$clientes));
+        return $this->render('innobisBundle:Default:observation.html.twig', 
+            array("id"=>$id, "reclamos"=>$reclamos, "clientes"=>$clientes, "form" => $form->createView()));
     }
     public function deptosAction()
     {

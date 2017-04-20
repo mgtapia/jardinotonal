@@ -22,28 +22,37 @@
 			      <table class="table table-striped table-hover">
 			      	<thead>
 				      	<tr style="color:#fff">
-							<th>#</th>
 							<th>Rut</th>
-							<th>Departamento</th>
-							<th>Torre</th>
+							<th>Vivienda</th>
 							<th>Recinto</th>
-							<th>Inicio</th>
-							<th>Termino</th>
-							<th>Grevedad</th>
+							<th>Ingreso</th>
+							<th> </th>
 						</tr>
 					</thead>
-					<tbody style="background:rgba(220,220,220,.95)">
+					<tbody>
 					{% for reclamo in reclamos %}
 						{% if reclamo.id == id %}
 						<tr>
-							<td>{{ loop.index }}</td>
 							<td>{{ reclamo.rut }}</td>
-							<td>{{ reclamo.departamento }}</td>
-							<td>{{ reclamo.torre }}</td>
+							<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
 							<td>{{ reclamo.recinto }}</td>
 							<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
-							<td>{{ reclamo.fechaSolucion|date('d-m-Y') }}</td>
-							<td>{{ reclamo.gravedad }}</td>
+							{% if reclamo.fechaSolucion|date('d-m-Y') == ""|date('d-m-Y') %}
+							<td><i class="glyphicon glyphicon-time time" title="Pendiente"></i></td>
+							{% else %}
+							<td><i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i></td>
+							{% endif %}
+						</tr>
+						{% endif %}
+					{% endfor %}
+					</tbody>
+			      </table>
+			      <table class="table table-striped table-hover">	     
+					<tbody>
+					{% for reclamo in reclamos %}
+						{% if reclamo.id == id %}
+						<tr>
+							<td title="Detalle">{{ reclamo.detalle }}</td>
 						</tr>
 						{% endif %}
 					{% endfor %}
@@ -52,14 +61,36 @@
 			      <table class="table table-striped table-hover">
 			      	<thead>
 				      	<tr style="color:#fff">
-							<th>Observacion</th>
+							<th>Categoría</th>
+							<th>Grevedad</th>
+							<th>Observación</th>
+							<th>Solución</th>
 						</tr>
 					</thead>
-					<tbody style="background:rgba(220,220,220,.95)">
+					<tbody>
 					{% for reclamo in reclamos %}
 						{% if reclamo.id == id %}
 						<tr>
+							{% if reclamo.categoria != "" %}
+							<td>{{ reclamo.categoria }}</td>
+							{% else %}
+							<td>-</td>
+							{% endif %}
+							{% if reclamo.gravedad != "" %}
+							<td>{{ reclamo.gravedad }}</td>
+							{% else %}
+							<td>-</td>
+							{% endif %}
+							{% if reclamo.observacion != "" %}
 							<td>{{ reclamo.observacion }}</td>
+							{% else %}
+							<td>No hay observaciones</td>
+							{% endif %}
+							{% if reclamo.fechaSolucion|date('d-m-Y') != ""|date('d-m-Y') %}
+							<td>{{ reclamo.fechaSolucion|date('d-m-Y') }}</td>
+							{% else %}
+							<td>Pendiente</td>
+							{% endif %}
 						</tr>
 						{% endif %}
 					{% endfor %}
@@ -68,7 +99,55 @@
 			    </div>
 			</div>
 		</div>
+
+		<div class="Title text-center">
+		    <div class="clear2"></div><br/>
+		    <h2 class="txtwhite">Administrador</h2><br/>
 		</div>
+		<div class="col-xs-12 col-sm-8 col-md-4 col-center">
+			{{ form_start(form, {'attr': {'role':'form'}}) }}
+			    <fieldset>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Categoría</label>
+			      		{{ form_widget(form.categoria, {'attr':{'placeholder':'Categoria', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.categoria) }}</span>
+			      	</div>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Gravedad</label>
+			      		{{ form_widget(form.gravedad, {'attr':{'placeholder':'Gravedad', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.gravedad) }}</span>
+			      	</div>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Observación</label>
+			      		{{ form_widget(form.observacion, {'attr':{'placeholder':'Observación', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.observacion) }}</span>
+			      	</div>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Solución</label>
+			      		{{ form_widget(form.fechaSolucion, {'attr':{'placeholder':'Solución', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.fechaSolucion) }}</span>
+			      	</div>
+			      	<div class="form-group hidden">
+			      		<label class="txtwhite">ID</label>
+			      		{{ form_widget(form.id, {'attr':{'placeholder':'Id', 'class':'form-control','value':id}}) }}
+			      		<span class="text-danger">{{ form_errors(form.id) }}</span>
+			      	</div>
+			    </fieldset>
+			    <p class="text-center">{{ form_widget(form.save, {'attr':{'class':'btn btn-primary form-control','label':'Enviar'}}) }}</p>
+		      	{{ form_end(form) }}
+				<div class="clear2"></div><br/>
+			</div>
+		</div>
+
+		{% for flashMessage in app.session.flashbag.get('mensaje') %}
+	        <div class="alert alert-success message-alert" role="alert">
+	          <div class="container">{{ flashMessage }}</div>
+	          <script>
+	            setTimeout("$('.message-alert').fadeIn('slow')", 1000);
+	          setTimeout("$('.message-alert').fadeOut('slow')", 4000);
+	        </script>
+	        </div>
+	      {% endfor %}
 	</body>
 {% else %}
 	{{ include('innobisBundle:Default:error.html.twig') }}

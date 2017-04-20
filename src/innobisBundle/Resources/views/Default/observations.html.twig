@@ -16,10 +16,10 @@
 				      	<tr style="color:#fff">
 							<th>#</th>
 							<th>Rut</th>
-							<th>Departamento</th>
-							<th>Torre</th>
+							<th>Vivienda</th>
 							<th>Recinto</th>
-							<th>Fecha</th>
+							<th>Ingreso</th>
+							<th>Estado</th>
 							<th> </th>
 						</tr>
 					</thead>
@@ -28,11 +28,16 @@
 						<tr>
 							<td>{{ loop.index }}</td>
 							<td>{{ reclamo.rut }}</td>
-							<td>{{ reclamo.departamento }}</td>
-							<td>{{ reclamo.torre }}</td>
+							<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
 							<td>{{ reclamo.recinto }}</td>
 							<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
-							<td><a class="link" href="{{path('innobis_obs',{'id':reclamo.id})}}">Ver</a></td>
+							{% if reclamo.fechaSolucion|date('d-m-Y') == ""|date('d-m-Y') %}
+							<td><i class="glyphicon glyphicon-time time" title="Pendiente"></i></td>
+							{% else %}
+							<td><i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i></td>
+							{% endif %}
+							<td><a class="link" href="{{path('innobis_obs',{'id':reclamo.id})}}" title="Ver detalles">
+								Ver</a></td>
 						</tr>
 					{% endfor %}
 					</tbody>

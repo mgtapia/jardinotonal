@@ -7,7 +7,7 @@
     <div class="cotizador--fixed">
       <form action="{{path('innobis_check')}}" method="post" class="formulario__datos formulario__login">
           <h2>Inicia Sesión</h2>
-          <h6>¿Eres nuevo aquí? <a href="{{path('innobis_signup')}}">Regístrate</a></h6>
+          <h6>Acceso Administración</h6>
        		{% if error %}
   				<div class="text-dange">
   					<p><strong>{{ error.messageKey }}</strong></p>
@@ -15,7 +15,7 @@
        		{% endif %}
           <input id="emailHolder" type="email" placeholder="Email" name="_email" value="{{last_username}}" required autofocus/>
           <input id="passHolder" type="password" placeholder="Contraseña" name="_password" required autofocus/>
-          <input type="hidden" name="_target_path" value="innobis_users"/>
+          <input type="hidden" name="_target_path" value="innobis_observation_list"/>
           <button type="submit" class="submit__btn">Ingresar</button>
         </form> 
     </div>

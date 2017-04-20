@@ -24,7 +24,7 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="observacion" type="text" column="observacion" length="65536" nullable="false">
+    <field name="detalle" type="text" column="detalle" length="65536" nullable="false">
       <options>
         <option name="fixed"/>
       </options>

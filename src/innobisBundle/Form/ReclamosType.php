@@ -43,7 +43,7 @@ class ReclamosType extends AbstractType
                 )
             ))
             ->add('fechaReclamo','date')
-            ->add('observacion', TextareaType::class)
+            ->add('detalle', TextareaType::class)
             ->add('save','submit', array('label'=>'Enviar'))
         ;
     }
