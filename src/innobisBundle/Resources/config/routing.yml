@@ -22,6 +22,9 @@ innobis_delete:
 innobis_client:
     path:     /client/{id}
     defaults: { _controller: innobisBundle:Default:client }
+innobis_asignar:
+    path:     /newdepto/{id}
+    defaults: { _controller: innobisBundle:Default:asignar }
 
 innobis_check:
     path:   /check

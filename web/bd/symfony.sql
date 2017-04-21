@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-04-2017 a las 22:36:51
+-- Tiempo de generación: 21-04-2017 a las 01:31:45
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -65,7 +65,6 @@ INSERT INTO `clientes` (`id`, `rut`, `nombre`) VALUES
 ('32', '9355289-K', 'ANGELA MOVILLO HERMOSILLA'),
 ('33', '9441345-1', 'JAIME PIMENTEL SEBALLOS'),
 ('34', '9485837-2', 'IGOR SOLIS GATICA'),
-('39', '17756854-6', 'MATíAS TAPIA'),
 ('4', '10939754-7', 'DINKA BASIC/JUAN PABLO CARDENAS'),
 ('5', '11635174-9', 'KARLA CRISTINA ARAVENA ARELLANO'),
 ('6', '12627993-0', 'MARIA SOLEDAD URZUA BAQUEDANO'),
@@ -272,17 +271,20 @@ CREATE TABLE `reclamos` (
   `torre` varchar(11) NOT NULL,
   `fechaReclamo` date NOT NULL,
   `fechaSolucion` date NOT NULL,
-  `gravedad` varchar(255) NOT NULL,
+  `gravedad` int(11) NOT NULL,
   `observacion` text NOT NULL,
-  `recinto` varchar(255) NOT NULL
+  `recinto` varchar(255) NOT NULL,
+  `detalle` text NOT NULL,
+  `categoria` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `reclamos`
 --
 
-INSERT INTO `reclamos` (`id`, `rut`, `departamento`, `torre`, `fechaReclamo`, `fechaSolucion`, `gravedad`, `observacion`, `recinto`) VALUES
-(1, '6813891-4', 102, 'B', '2017-04-13', '0000-00-00', '', 'Nueva', 'BAÑO 1 PPAL');
+INSERT INTO `reclamos` (`id`, `rut`, `departamento`, `torre`, `fechaReclamo`, `fechaSolucion`, `gravedad`, `observacion`, `recinto`, `detalle`, `categoria`) VALUES
+(7, '6813891-4', 102, 'B', '2017-04-20', '2017-04-21', 1, 'S1', 'BAÑO 1 PPAL', 'Se tapo el baño', 'Pre Entrega'),
+(8, '15377046-8', 206, 'A', '2017-04-20', '0000-00-00', 0, '', 'DORM 2', 'Me cai de la cama!', '');
 
 -- --------------------------------------------------------
 
@@ -305,8 +307,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
 (1, 'Matías', 'Tapia', 'mgtapia@uc.cl', '$2y$12$Am0E2wBvQsAGH1INJBdfJe3uBtri847hPFnduLvDk33wDwzZUGnw6'),
 (2, 'Pablo', 'Rios', 'perios@uc.cl', '$2y$12$BKnAgL.GoanXfueZfA9CLuWF7aiZS6ESukHaZvYveEE3SqU.N48vS'),
-(25, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq'),
-(26, 'Ricardo', 'Oyarzun', 'richi@uc.cl', '$2y$12$N3NkEKGXkedZMExIDonN1.ebJi5053mc3b//AhVjAVhcwGUAXh0L.');
+(25, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq');
 
 -- --------------------------------------------------------
 
@@ -315,6 +316,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
 --
 
 CREATE TABLE `viviendas` (
+  `id` int(11) NOT NULL,
   `Departamento` int(11) NOT NULL,
   `Torre` varchar(1) NOT NULL,
   `Tipo` int(11) NOT NULL,
@@ -325,49 +327,49 @@ CREATE TABLE `viviendas` (
 -- Volcado de datos para la tabla `viviendas`
 --
 
-INSERT INTO `viviendas` (`Departamento`, `Torre`, `Tipo`, `rut_dueno`) VALUES
-(101, 'A', 1, '6025638-1'),
-(101, 'B', 11, '4779335-1'),
-(102, 'A', 2, NULL),
-(102, 'B', 10, '6813891-4'),
-(103, 'A', 3, '7937577-2'),
-(103, 'B', 9, '7054308-7'),
-(104, 'A', 4, '15640216-8'),
-(104, 'B', 8, '16656748-3'),
-(105, 'A', 5, NULL),
-(106, 'A', 12, '4289328-5'),
-(201, 'A', 1, '2850653-8'),
-(201, 'B', 11, '10365994-9'),
-(202, 'A', 2, NULL),
-(202, 'B', 10, '12893093-0'),
-(203, 'A', 3, '10128575-8'),
-(203, 'B', 9, '13357949-4'),
-(204, 'A', 4, '16097493-1'),
-(204, 'B', 8, NULL),
-(205, 'A', 5, NULL),
-(205, 'B', 7, '7019209-8'),
-(206, 'A', 12, '15377046-8'),
-(301, 'A', 1, '9485837-2'),
-(301, 'B', 11, '10939754-7'),
-(302, 'A', 2, '5599998-8'),
-(302, 'B', 10, '16210291-5'),
-(303, 'A', 3, '6035678-5'),
-(303, 'B', 9, '9441345-1'),
-(304, 'A', 4, '11635174-9'),
-(304, 'B', 8, '12627993-0'),
-(305, 'A', 5, '15377575-3'),
-(305, 'B', 7, '4774405-9'),
-(306, 'A', 6, NULL),
-(401, 'A', 1, '9355289-K'),
-(401, 'B', 11, '7019487-2'),
-(402, 'A', 2, NULL),
-(402, 'B', 10, '17266863-1'),
-(403, 'A', 3, '14543737-7'),
-(403, 'B', 9, '6975584-4'),
-(404, 'A', 4, '24423670-7'),
-(404, 'B', 8, '10355703-8'),
-(405, 'A', 5, NULL),
-(406, 'A', 6, '23288005-8');
+INSERT INTO `viviendas` (`id`, `Departamento`, `Torre`, `Tipo`, `rut_dueno`) VALUES
+(1, 101, 'A', 1, '6025638-1'),
+(2, 101, 'B', 11, '4779335-1'),
+(3, 102, 'A', 2, NULL),
+(4, 102, 'B', 10, '6813891-4'),
+(5, 103, 'A', 3, '7937577-2'),
+(6, 103, 'B', 9, '7054308-7'),
+(7, 104, 'A', 4, '15640216-8'),
+(8, 104, 'B', 8, '16656748-3'),
+(9, 105, 'A', 5, NULL),
+(10, 106, 'A', 12, '4289328-5'),
+(11, 201, 'A', 1, '2850653-8'),
+(12, 201, 'B', 11, '10365994-9'),
+(13, 202, 'A', 2, NULL),
+(14, 202, 'B', 10, '12893093-0'),
+(15, 203, 'A', 3, '10128575-8'),
+(16, 203, 'B', 9, '13357949-4'),
+(17, 204, 'A', 4, '16097493-1'),
+(18, 204, 'B', 8, NULL),
+(19, 205, 'A', 5, NULL),
+(20, 205, 'B', 7, '7019209-8'),
+(21, 206, 'A', 12, '15377046-8'),
+(22, 301, 'A', 1, '9485837-2'),
+(23, 301, 'B', 11, '10939754-7'),
+(24, 302, 'A', 2, '5599998-8'),
+(25, 302, 'B', 10, '16210291-5'),
+(26, 303, 'A', 3, '6035678-5'),
+(27, 303, 'B', 9, '9441345-1'),
+(28, 304, 'A', 4, '11635174-9'),
+(29, 304, 'B', 8, '12627993-0'),
+(30, 305, 'A', 5, '15377575-3'),
+(31, 305, 'B', 7, '4774405-9'),
+(32, 306, 'A', 6, NULL),
+(33, 401, 'A', 1, '9355289-K'),
+(34, 401, 'B', 11, '7019487-2'),
+(35, 402, 'A', 2, NULL),
+(36, 402, 'B', 10, '17266863-1'),
+(37, 403, 'A', 3, '14543737-7'),
+(38, 403, 'B', 9, '6975584-4'),
+(39, 404, 'A', 4, '24423670-7'),
+(40, 404, 'B', 8, '10355703-8'),
+(41, 405, 'A', 5, NULL),
+(42, 406, 'A', 6, '23288005-8');
 
 --
 -- Índices para tablas volcadas
@@ -402,7 +404,8 @@ ALTER TABLE `users`
 -- Indices de la tabla `viviendas`
 --
 ALTER TABLE `viviendas`
-  ADD PRIMARY KEY (`Departamento`,`Torre`);
+  ADD PRIMARY KEY (`Departamento`,`Torre`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -412,12 +415,17 @@ ALTER TABLE `viviendas`
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
 ALTER TABLE `reclamos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT de la tabla `viviendas`
+--
+ALTER TABLE `viviendas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

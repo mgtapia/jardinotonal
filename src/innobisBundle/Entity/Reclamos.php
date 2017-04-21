@@ -29,6 +29,7 @@ class Reclamos
      * @var string
      *
      * @ORM\Column(name="rut", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $rut;
 
@@ -36,6 +37,7 @@ class Reclamos
      * @var int
      *
      * @ORM\Column(name="departamento", type="integer")
+     * @Assert\NotBlank()
      */
     private $departamento;
 
@@ -43,6 +45,7 @@ class Reclamos
      * @var string
      *
      * @ORM\Column(name="torre", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $torre;
 

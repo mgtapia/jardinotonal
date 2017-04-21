@@ -14,8 +14,7 @@
 			      <table class="table table-striped table-hover">
 			      	<thead>
 				      	<tr style="color:#fff">
-							<th>Depto</th>
-							<th>Torre</th>
+							<th>Vivienda</th>
 							<th>Tipo</th>
 							<th>Propietario</th>
 							<th></th>
@@ -24,15 +23,20 @@
 					<tbody style="background:rgba(220,220,220,.95)">
 					{% for user in deptos %}
 						<tr>
-							<td>{{ user.departamento }}</td>
-							<td>{{ user.torre }}</td>
+							<td>{{ user.departamento }}-{{ user.torre }}</td>
 							<td>{{ user.tipo }}</td>
-							<td>{{ user.rutDueno }}</td><td>
-							{% for cliente in clientes %}
-								{% if cliente.rut == user.rutDueno %}
-									{{ cliente.nombre }}
-								{% endif %}
-							{% endfor %}</td>
+							{% if user.rutDueno == "" %}
+								<td> </td><td><a href="{{ path('innobis_asignar',{'id':user.id}) }}" title="Asignar a un Propietario">Asignar</a></td>
+							{% else %}
+								<td>{{ user.rutDueno }}</td>
+								<td>
+								{% for cliente in clientes %}
+									{% if cliente.rut == user.rutDueno %}
+										{{ cliente.nombre }}
+									{% endif %}
+								{% endfor %}
+								</td>	
+							{% endif %}	
 						</tr>
 					{% endfor %}
 					</tbody>

@@ -13,6 +13,7 @@ use innobisBundle\Entity\RecintoVivienda;
 use innobisBundle\Entity\Reclamos;
 use innobisBundle\Form\ReclamosType;
 use innobisBundle\Form\SolutionType;
+use innobisBundle\Form\AsignarType;
 
 class DefaultController extends Controller
 {
@@ -155,21 +156,32 @@ class DefaultController extends Controller
         return $this->render('innobisBundle:Default:excel.html.twig', array("reclamos"=>$reclamos));
     }
     public function obsidAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-        $update = $em->getRepository('innobisBundle:Reclamos')->find($id);
+    {      
+        $update = $this->getDoctrine()->getRepository('innobisBundle:Reclamos')->find($id);
         $form = $this->createForm(new SolutionType(), $update);
+        
+        $request = $this->getRequest();
+        $form->handleRequest($request);
 
-        if($form->isValid())
+
+        $reclamos = $this->getDoctrine()->getRepository("innobisBundle:Reclamos")->findAll();
+
+        if ($form->isSubmitted()) 
         {
-            $em->persist($update);
-            $em->flush();
+            if ($form->isValid())
+            {
+                $update->setFechaSolucion(new \DateTime('now'));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($update);
+                $em->flush();
 
-            $this->addFlash('mensaje','Observación Actualizada');   
+                $this->addFlash('mensaje','Los cambios han sido guardados');
+                return $this->render('innobisBundle:Default:observations.html.twig', array("reclamos"=>$reclamos));
+            }
         }
 
         $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
-        $reclamos = $this->getDoctrine()->getRepository("innobisBundle:Reclamos")->findAll();
+
         return $this->render('innobisBundle:Default:observation.html.twig', 
             array("id"=>$id, "reclamos"=>$reclamos, "clientes"=>$clientes, "form" => $form->createView()));
     }
@@ -178,5 +190,31 @@ class DefaultController extends Controller
         $viviendas = $this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll();
         $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
         return $this->render('innobisBundle:Default:deptos.html.twig', array("deptos"=>$viviendas, "clientes"=>$clientes));
+    }
+    public function asignarAction($id)
+    {
+        $update = $this->getDoctrine()->getRepository('innobisBundle:Viviendas')->find($id);
+        $form = $this->createForm(new AsignarType(), $update);
+        
+        $request = $this->getRequest();
+        $form->handleRequest($request);
+
+        $viviendas = $this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll();
+        $clientes = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll();
+
+        if ($form->isSubmitted()) 
+        {
+            $rut = $form->get('rutDueno')->getData();
+            if ($form->isValid() && $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findByRut($rut))
+            {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($update);
+                $em->flush();
+
+                $this->addFlash('mensaje','Los cambios han sido guardados');
+                return $this->render('innobisBundle:Default:deptos.html.twig', array("deptos"=>$viviendas, "clientes"=>$clientes));
+            }
+        }
+        return $this->render('innobisBundle:Default:asignar.html.twig', array("id"=>$id, 'form'=>$form->createView(), "deptos"=>$viviendas, "clientes"=>$clientes));
     }
 }

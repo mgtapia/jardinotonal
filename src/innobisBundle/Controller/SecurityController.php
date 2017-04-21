@@ -50,7 +50,7 @@ class SecurityController extends Controller
 
             $this->addFlash('mensaje','El cliente ha sido creado');
         
-            return $this->redirectToRoute('innobis_homepage');
+            return $this->redirectToRoute('innobis_deptos');
         }
 
         return $this->render('innobisBundle:Default:clients.html.twig', array('form'=>$form->createView()));

@@ -17,7 +17,6 @@ class SolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id')
             ->add('categoria', ChoiceType::class, array(
                 'placeholder' => 'SELECCIONA UNA CATEGORÍA', 'choices' => array(       
                     'Pre Entrega'=>'Pre Entrega',
@@ -47,12 +46,5 @@ class SolutionType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'innobisBundle\Entity\Reclamos'
         ));
-    }
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'reclamos';
     }
 }

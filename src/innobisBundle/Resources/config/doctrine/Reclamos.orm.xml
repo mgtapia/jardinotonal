@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="innobisBundle\Entity\Reclamos" table="reclamos">
-    <id name="id" type="string" column="id" length="10">
+    <id name="id" type="integer" column="id" length="10">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="rut" type="string" column="rut" length="255" nullable="false">
@@ -19,12 +19,32 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="categoria" type="string" column="categoria" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="gravedad" type="integer" column="gravedad" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="fechaReclamo" type="date" column="fechaReclamo" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
+    <field name="fechaSolucion" type="date" column="fechaSolucion" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="detalle" type="text" column="detalle" length="65536" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observacion" type="text" column="observacion" length="65536" nullable="false">
       <options>
         <option name="fixed"/>
       </options>

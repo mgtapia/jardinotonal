@@ -31,10 +31,10 @@
 							<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
 							<td>{{ reclamo.recinto }}</td>
 							<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
-							{% if reclamo.fechaSolucion|date('d-m-Y') == ""|date('d-m-Y') %}
-							<td><i class="glyphicon glyphicon-time time" title="Pendiente"></i></td>
-							{% else %}
+							{% if reclamo.gravedad != "" %}
 							<td><i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i></td>
+							{% else %}
+							<td><i class="glyphicon glyphicon-time time" title="Pendiente"></i></td>
 							{% endif %}
 							<td><a class="link" href="{{path('innobis_obs',{'id':reclamo.id})}}" title="Ver detalles">
 								Ver</a></td>

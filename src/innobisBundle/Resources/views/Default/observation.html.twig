@@ -37,10 +37,10 @@
 							<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
 							<td>{{ reclamo.recinto }}</td>
 							<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
-							{% if reclamo.fechaSolucion|date('d-m-Y') == ""|date('d-m-Y') %}
-							<td><i class="glyphicon glyphicon-time time" title="Pendiente"></i></td>
-							{% else %}
+							{% if reclamo.gravedad != "" %}
 							<td><i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i></td>
+							{% else %}
+							<td><i class="glyphicon glyphicon-time time" title="Pendiente"></i></td>
 							{% endif %}
 						</tr>
 						{% endif %}
@@ -86,7 +86,7 @@
 							{% else %}
 							<td>No hay observaciones</td>
 							{% endif %}
-							{% if reclamo.fechaSolucion|date('d-m-Y') != ""|date('d-m-Y') %}
+							{% if reclamo.fechaSolucion|date('d-m-Y') - reclamo.fechaReclamo|date('d-m-Y') > 0 %}
 							<td>{{ reclamo.fechaSolucion|date('d-m-Y') }}</td>
 							{% else %}
 							<td>Pendiente</td>
@@ -126,11 +126,6 @@
 			      		<label class="txtwhite">Solución</label>
 			      		{{ form_widget(form.fechaSolucion, {'attr':{'placeholder':'Solución', 'class':'form-control'}}) }}
 			      		<span class="text-danger">{{ form_errors(form.fechaSolucion) }}</span>
-			      	</div>
-			      	<div class="form-group hidden">
-			      		<label class="txtwhite">ID</label>
-			      		{{ form_widget(form.id, {'attr':{'placeholder':'Id', 'class':'form-control','value':id}}) }}
-			      		<span class="text-danger">{{ form_errors(form.id) }}</span>
 			      	</div>
 			    </fieldset>
 			    <p class="text-center">{{ form_widget(form.save, {'attr':{'class':'btn btn-primary form-control','label':'Enviar'}}) }}</p>
