@@ -15,7 +15,6 @@ use innobisBundle\Entity\RecintoVivienda;
 use innobisBundle\Form\SolutionType;
 use innobisBundle\Form\EnterType;
 use innobisBundle\Form\AsignarType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class DefaultController extends Controller
 {
@@ -23,7 +22,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         return $this->render('innobisBundle:Default:index.html.twig', 
-            array( 'form'=>$this->enterCreateForm(new Clientes())->createView() )
+            array('form'=>$this->enterCreateForm(new Clientes())->createView())
         );
     }
     public function enterAction(Request $request)
@@ -43,7 +42,7 @@ class DefaultController extends Controller
     private function enterCreateForm(Clientes $entity) 
     {
         return $this->createForm(new EnterType(), $entity, 
-            array( 'action' => $this->generateUrl('innobis_client_enter'), 'method' => 'POST' )
+            array('action'=>$this->generateUrl('innobis_client_enter'),'method'=>'POST')
         );
     }
 
@@ -66,7 +65,7 @@ class DefaultController extends Controller
         }
         
         return $this->render('innobisBundle:Default:client.html.twig', array(
-            'id'=>$form->get('rut')->getData(), 'form'=>$form->createView(), 'check'=>"Si", 
+            'id'=>$form->get('rut')->getData(), 'form'=>$form->createView(), 
             'clientes'=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll(), 
             'viviendas'=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll(), 
             'recintos'=>$this->getDoctrine()->getRepository("innobisBundle:RecintoVivienda")->findAll()
@@ -76,12 +75,18 @@ class DefaultController extends Controller
     private function observationCreateForm(Reclamos $entity) 
     {
         return $this->createForm(new ReclamosType(), $entity, 
-            array( 'action' => $this->generateUrl('innobis_observation'), 'method' => 'POST' )
+            array('action'=>$this->generateUrl('innobis_observation'),'method'=>'POST')
         );
     }
     public function clientAction($id)
     {
-        return $this->render('innobisBundle:Default:client.html.twig', array('id'=>$id));
+        return $this->render('innobisBundle:Default:client.html.twig',array( 
+            'id'=>$id,'form'=>$this->observationCreateForm(new Reclamos())->createView(),
+            'clientes'=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll(), 
+            'recintos'=>$this->getDoctrine()->getRepository("innobisBundle:RecintoVivienda")->findAll(), 
+            'viviendas'=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll()
+            )
+        );
     }
 
     #Administrador
@@ -89,19 +94,19 @@ class DefaultController extends Controller
     {
         $auth = $this->get('security.authentication_utils');
         return $this->render('innobisBundle:Default:admin.html.twig', 
-            array( 'last_username'=>$auth->getLastUsername(), 'error'=>$auth->getLastAuthenticationError() )
+            array('last_username'=>$auth->getLastUsername(),'error'=>$auth->getLastAuthenticationError())
         );
     }
     public function adminListAction()
     {
         return $this->render('innobisBundle:Default:admin_list.html.twig', 
-            array( "users"=>$this->getDoctrine()->getRepository("innobisBundle:Users")->findAll() )
+            array("users"=>$this->getDoctrine()->getRepository("innobisBundle:Users")->findAll())
         );
     }  
     public function adminClientsAction()
     {
         return $this->render('innobisBundle:Default:admin_clients.html.twig', 
-            array( "clientes"=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll() )
+            array("clientes"=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll())
         );
     }
     public function adminDeptosAction()
@@ -181,7 +186,8 @@ class DefaultController extends Controller
                 $this->addFlash('mensaje','Los cambios han sido guardados');
                 return $this->render('innobisBundle:Default:admin_deptos.html.twig', array(
                     "deptos"=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll(), 
-                    "clientes"=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll())
+                    "clientes"=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll()
+                    )
                 );
             }
         }
@@ -195,7 +201,7 @@ class DefaultController extends Controller
     private function createCreateForm(Users $entity) 
     {
         return $this->createForm(new UsersType(), $entity, 
-            array( 'action' => $this->generateUrl('innobis_create'), 'method' => 'POST' )
+            array('action'=>$this->generateUrl('innobis_create'),'method'=>'POST')
         );
     }
     public function createAction(Request $request)
@@ -219,13 +225,13 @@ class DefaultController extends Controller
             return $this->redirectToRoute('innobis_admin_list');
         }
 
-       return $this->render('innobisBundle:Default:admin_signup.html.twig', array('form'=>$form->createView()));
+       return $this->render('innobisBundle:Default:admin_signup.html.twig',array('form'=>$form->createView()));
     }
 
     private function newClientCreateForm(Clientes $entity) 
     {
         return $this->createForm(new ClientesType(), $entity, 
-            array( 'action' => $this->generateUrl('innobis_new_client'), 'method' => 'POST' )
+            array('action'=>$this->generateUrl('innobis_new_client'),'method'=>'POST')
         );
     }
     public function newClientAction(Request $request)

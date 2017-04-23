@@ -58,6 +58,13 @@ innobis_observation:
     path:     /client_obs
     defaults: { _controller: innobisBundle:Default:observation }
     methods: POST
+innobis_import:
+    path:     /import/{id}
+    defaults: { _controller: innobisBundle:Security:import }
+innobis_loadCSV:
+    path:     /importCSV
+    defaults: { _controller: innobisBundle:Security:loadCSV }
+
 
 #Otro
 innobis_create:

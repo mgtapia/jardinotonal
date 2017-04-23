@@ -69,7 +69,9 @@
 {
     position: absolute;
     top:60px;
-    width: 265px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: auto;
 }
 a.link, a.link:hover, a.link:focus
 {

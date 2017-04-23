@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Jardín Otoñal</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a></a></li>
+        <li><a href="{{ path('innobis_client',{'id':id}) }}"><i class="glyphicon glyphicon-list-alt"></i> Formulario</a></li>
+        <li><a href="{{ path('innobis_import',{'id':id}) }}"><i class="glyphicon glyphicon-import"></i> Importar CSV</a></li>
+        <li><a href="{{ asset('files/Formulario.csv') }}" download><i class="glyphicon glyphicon-download"></i> Descargar CSV</a></li>
+      </ul>     
+      <ul class="nav navbar-nav navbar-right">
+		<li><a>Propietario</a></li>
+      	{% for vivienda in viviendas %}
+			{% if vivienda.rutDueno == id %}
+				<li><a>Departamento {{vivienda.departamento}} {{vivienda.torre}}</a></li>
+			{% endif %}
+		{% endfor %}			
+      	{% for cliente in clientes %}
+			{% if cliente.rut == id %}
+				<li class="active"><a>{{cliente.nombre}}</a></li>
+			{% endif %}
+		{% endfor %}		        
+        <li><a href="{{ path('innobis_homepage') }}"><i class="glyphicon glyphicon-log-out"></i></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

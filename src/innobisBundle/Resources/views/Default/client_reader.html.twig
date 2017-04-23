@@ -1,0 +1,45 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block client %}
+	<body class="bg-info2">
+		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">
+			
+			<div class="Title text-center">
+			    <div class="clear2"></div><div class="clear2"></div><br/>
+			    <h1 class="txtwhite">Lector CSV</h1><br/>
+			</div>
+		    
+		    <div class="col-xs-12 col-sm-8 col-center">
+		    	<table class="table table-striped table-hover">
+		    		{% for row in data %}
+						{% if loop.index == 1 %}
+					      	<thead>
+						      	<tr class="txtwhite">
+						      		{% for th in row %}
+						    			<th>{{ th }}</th>			
+						    		{% endfor %}
+								</tr>
+							</thead>
+						{% else %}
+							<tbody style="background:rgba(220,220,220,.95)">
+								<tr>
+						      		{% for td in row %}			
+											<td>{{ td }}</td>
+						    		{% endfor %}
+								</tr>
+							</tbody>
+						{% endif %}
+					{% endfor %}
+			    </table>
+			</div>
+		</div>
+		<div style="background:rgba(0,0,0,0.1)">
+			<div class="col-md-offset-1 col-md-10" style="margin-top:-20px">
+			    <h6 class="m2b">&copy; {{"now"|date('Y')}}
+			    	<a href="https://fb.com/m2btech" target="_blank">M2B Technologies</a> IT Solutions
+			    </h6><br/>
+			</div>
+		</div>
+	</body>
+{% endblock %}
+			    
