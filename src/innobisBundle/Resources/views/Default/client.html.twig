@@ -1,100 +1,95 @@
 {% extends 'innobisBundle::main.html.twig' %}
 
-{% block body %}
-{% if check == 'Si' %}	
-<body class="bg-info2">
-	<div class="container-fluid" style="background:rgba(0,0,0,0.2)">
-		<nav class="navbar navbar-default navbar-fixed-top">
-		  <div class="container">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="#">Jardín Otoñal</a>
+{% block client %}
+	{% if check == 'Si' %}	
+	<body class="bg-info2">
+		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">
+			<nav class="navbar navbar-default navbar-fixed-top">
+			  <div class="container">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="#">Jardín Otoñal</a>
+			    </div>
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			        <li><a></a></li>
+			      </ul>     
+			      <ul class="nav navbar-nav navbar-right">
+	        		<li><a>Propietario</a></li>
+			      	{% for vivienda in viviendas %}
+						{% if vivienda.rutDueno == id %}
+							<li><a>Departamento {{vivienda.departamento}} {{vivienda.torre}}</a></li>
+						{% endif %}
+					{% endfor %}			
+			      	{% for cliente in clientes %}
+						{% if cliente.rut == id %}
+							<li class="active"><a>{{cliente.nombre}}</a></li>
+						{% endif %}
+					{% endfor %}		        
+			        <li><a href="{{ path('innobis_homepage') }}"><i class="glyphicon glyphicon-log-out"></i></a></li>
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</nav>
+
+			<div class="Title text-center">
+			    <div class="clear2"></div><div class="clear2"></div><br/>
+			    <h1 class="txtwhite">Observaciones</h1><br/>
+			</div>
+		    <div class="col-xs-12 col-sm-8 col-md-4 col-center">
+		    	{{ form_start(form, {'attr': {'role':'form'}}) }}
+			    <fieldset>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Recinto</label>
+			      		{{ form_widget(form.recinto, {'attr':{'placeholder':'Recinto', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.recinto) }}</span>
+			      	</div>
+			      	
+			      	{% for vivienda in viviendas %}
+						{% if vivienda.rutDueno == id %}
+							<div class="form-group hide">
+					      		{{ form_widget(form.departamento, {'attr':{'placeholder':'Departamento','value':vivienda.departamento}}) }}
+					      		<span class="text-danger">{{ form_errors(form.departamento) }}</span>
+					      	</div>
+					      	<div class="form-group hide">
+					      		{{ form_widget(form.torre, {'attr':{'placeholder':'Torre','value':vivienda.torre}}) }}
+					      		<span class="text-danger">{{ form_errors(form.torre) }}</span>
+					      	</div>
+						{% endif %}
+					{% endfor %}
+
+					<div class="form-group">
+			      		<label class="txtwhite">Detalle</label>
+			      		{{ form_widget(form.detalle, {'attr':{'placeholder':'Escribenos','class':'form-control hh'}} ) }}
+			      		<span class="text-danger">{{ form_errors(form.detalle) }}</span>
+			      	</div>
+			      	<div class="form-group hide">
+			      		{{ form_widget(form.rut, {'attr':{'placeholder':'Rut','value':id}}) }}
+			      		<span class="text-danger">{{ form_errors(form.rut) }}</span>
+			      	</div>
+			      	<div class="form-group hide">
+			      		{{ form_widget(form.fechaReclamo, {'attr':{'placeholder':'Recinto','value':"now"|date("m/d/Y")}}) }}
+			      		<span class="text-danger">{{ form_errors(form.fechaReclamo) }}</span>
+			      	</div>
+			    </fieldset>
+			    <p class="text-center">{{ form_widget(form.save, {'attr':{'class':'btn btn-primary form-control','label':'Enviar'}}) }}</p>
+		      	{{ form_end(form) }}
 		    </div>
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-		        <li><a></a></li>
-		      </ul>     
-		      <ul class="nav navbar-nav navbar-right">
-        		<li><a>Propietario</a></li>
-		      	{% for vivienda in viviendas %}
-					{% if vivienda.rutDueno == id %}
-						<li><a>Departamento {{vivienda.departamento}} {{vivienda.torre}}</a></li>
-					{% endif %}
-				{% endfor %}			
-		      	{% for cliente in clientes %}
-					{% if cliente.rut == id %}
-						<li class="active"><a>{{cliente.nombre}}</a></li>
-					{% endif %}
-				{% endfor %}		        
-		        <li><a href="{{ path('innobis_homepage') }}"><i class="glyphicon glyphicon-log-out"></i></a></li>
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-		</nav>
-
-		<div class="Title text-center">
-		    <div class="clear2"></div><div class="clear2"></div><br/>
-		    <h1 class="futurastdbook txtwhite">Observaciones</h1><br/>
 		</div>
-	    <div class="col-xs-12 col-sm-8 col-md-4 col-center">
-	    	{{ form_start(form, {'attr': {'role':'form'}}) }}
-		    <fieldset>
-		      	<div class="form-group">
-		      		<label class="txtwhite">Recinto</label>
-		      		{{ form_widget(form.recinto, {'attr':{'placeholder':'Recinto', 'class':'form-control'}}) }}
-		      		<span class="text-danger">{{ form_errors(form.recinto) }}</span>
-		      	</div>
-		      	
-		      	{% for vivienda in viviendas %}
-					{% if vivienda.rutDueno == id %}
-						<div class="form-group hide">
-				      		{{ form_widget(form.departamento, {'attr':{'placeholder':'Departamento','value':vivienda.departamento}}) }}
-				      		<span class="text-danger">{{ form_errors(form.departamento) }}</span>
-				      	</div>
-				      	<div class="form-group hide">
-				      		{{ form_widget(form.torre, {'attr':{'placeholder':'Torre','value':vivienda.torre}}) }}
-				      		<span class="text-danger">{{ form_errors(form.torre) }}</span>
-				      	</div>
-					{% endif %}
-				{% endfor %}
-
-				<div class="form-group">
-		      		<label class="txtwhite">Detalle</label>
-		      		{{ form_widget(form.detalle, {'attr':{'placeholder':'Escribenos','class':'form-control hh'}} ) }}
-		      		<span class="text-danger">{{ form_errors(form.detalle) }}</span>
-		      	</div>
-		      	<div class="form-group hide">
-		      		{{ form_widget(form.rut, {'attr':{'placeholder':'Rut','value':id}}) }}
-		      		<span class="text-danger">{{ form_errors(form.rut) }}</span>
-		      	</div>
-		      	<div class="form-group hide">
-		      		{{ form_widget(form.fechaReclamo, {'attr':{'placeholder':'Recinto','value':"now"|date("m/d/Y")}}) }}
-		      		<span class="text-danger">{{ form_errors(form.fechaReclamo) }}</span>
-		      	</div>
-		    </fieldset>
-		    <p class="text-center">{{ form_widget(form.save, {'attr':{'class':'btn btn-primary form-control','label':'Enviar'}}) }}</p>
-	      	{{ form_end(form) }}
-	    </div>
-	</div>
-
-	{% for flashMessage in app.session.flashbag.get('mensaje') %}
-	        <div class="alert alert-success message-alert" role="alert">
-	          <div class="container">{{ flashMessage }}</div>
-	          <script>
-	            setTimeout("$('.message-alert').fadeIn('slow')", 1000);
-	          setTimeout("$('.message-alert').fadeOut('slow')", 4000);
-	        </script>
-	        </div>
-	      {% endfor %}
-</body>
-{% else %}
-	{{ include('innobisBundle:Default:error.html.twig') }}
-{% endif %}
+		<div style="background:rgba(0,0,0,0.1)">
+			<div class="col-md-offset-1 col-md-10" style="margin-top:-20px">
+			    <h6 class="m2b">&copy; {{"now"|date('Y')}}
+			    	<a href="https://fb.com/m2btech" target="_blank">M2B Technologies</a> IT Solutions
+			    </h6><br/>
+			</div>
+		</div>
+	</body>
+	{% endif %}
 {% endblock %}

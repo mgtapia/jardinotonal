@@ -10,7 +10,38 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/otonal.css')}}">
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    	{{ include('innobisBundle:Default:menu.html.twig') }}
+	    <div style="background:rgba(0,0,0,0.1)">
+			<div class="col-md-offset-1 col-md-10" style="margin-top:-20px">
+			    <h6 class="m2b">&copy; {{"now"|date('Y')}}
+			    	<a href="https://fb.com/m2btech" target="_blank">M2B Technologies</a> IT Solutions
+			    </h6><br/>
+			</div>
+		</div>
+    {% else %}
+    	{% block client %}
+    	<body class="bg-otonal">
+		    <div style="text-align:center; background:rgba(0,0,0,0.2); height:100vh">
+				<a><img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/></a>
+				<h3 style="color:white">Acceso Restringido</h3>
+				<a href="{{ path('innobis_homepage') }}" style="color:white">Ir a la Página de Inicio</a>
+			</div>			    
+		</body>	
+		{% endblock %}
+	{% endif %}
+
+	{% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success message-alert" role="alert">
+          	<div class="container">{{ flashMessage }}</div>
+          	<script>
+            	setTimeout("$('.message-alert').fadeIn('slow')", 1000);
+          		setTimeout("$('.message-alert').fadeOut('slow')", 4000);
+        	</script>
+        </div>
+    {% endfor %}
+{% endblock %}
 	
 {% block javascripts %}
 	<script src="{{asset('js/jquery.min.js')}}"></script>

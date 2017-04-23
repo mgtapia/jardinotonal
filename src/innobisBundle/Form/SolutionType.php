@@ -26,10 +26,10 @@ class SolutionType extends AbstractType
             ))
             ->add('gravedad', ChoiceType::class, array(
                 'placeholder' => 'SELECCIONA LA GRAVEDAD', 'choices' => array(       
-                    '1'=>'1',
-                    '2'=>'2',
-                    '3'=>'3',
-                    '4'=>'4'
+                    '1'=>'1: Gas - Electricidad',      
+                    '2'=>'2: Agua - Caldera - Electricidad - Muros - Tapas - Seguridad',
+                    '3'=>'3: Citófonos - Corrientes Debiles - Techumbre - Portones',
+                    '4'=>'4: Muros - Accesorios - Jardín - Varios'
                 )
             ))
             ->add('fechaSolucion','date')

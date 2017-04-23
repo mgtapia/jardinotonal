@@ -1,0 +1,51 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block body %}
+	<body class="bg-info2">
+		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">	
+		  	<div class="col-md-offset-2 col-md-8">
+		      	<div class="page-header margin-none txtwhite">
+		      		<h1 style="margin-top:100px">Reclamos</h1>
+		      	</div>
+			    <div class="table-responsive">
+			    	{% if reclamos|length > 0 %}
+			      	<table class="table table-striped table-hover">
+				      	<thead>
+					      	<tr class="txtwhite">
+								<th>#</th>
+								<th>Rut</th>
+								<th>Vivienda</th>
+								<th>Recinto</th>
+								<th>Ingreso</th>
+								<th>Estado</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody style="background:rgba(220,220,220,.95)">
+						{% for reclamo in reclamos|reverse %}
+							<tr>	
+								<td>{{ loop.index }}</td>
+								<td>{{ reclamo.rut }}</td>
+								<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
+								<td>{{ reclamo.recinto }}</td>
+								<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
+								<td>{% if reclamo.fechaSolucion != NULL and
+								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+								<i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i>{% else %}
+								<i class="glyphicon glyphicon-time time" title="Pendiente"></i>{% endif %}</td>	
+								<td><a class="link" href="{{path('innobis_admin_observation',{'id':reclamo.id})}}" title="Ver detalles">Ver</a></td>
+							</tr>
+						{% endfor %}
+						</tbody>
+			     	</table>
+			     	{% else %}
+			     		<h4 class="txtwhite txtshadow">No hay reclamos registrados en nuestra base de datos.</h4>
+			     	{% endif %}
+			      	<div class="clear2"></div>
+			      	<div class="clear2"></div>
+			    </div>
+			</div>
+		</div>
+	    {{ parent() }}
+	</body>
+{% endblock %}

@@ -1,23 +1,18 @@
 {% extends 'innobisBundle::main.html.twig' %}
 
-{% block body %}
-  <div>
-  <body class="bg-otonal">
-    <img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/>
-    <div class="cotizador--fixed">
-      <form action="{{path('innobis_check')}}" method="post" class="formulario__datos formulario__login">
-          <h2>Inicia Sesión</h2>
-          <h6>Acceso Administración</h6>
-       		{% if error %}
-  				<div class="text-dange">
-  					<p><strong>{{ error.messageKey }}</strong></p>
-  				</div>	
-       		{% endif %}
-          <input id="emailHolder" type="email" placeholder="Email" name="_email" value="{{last_username}}" required autofocus/>
-          <input id="passHolder" type="password" placeholder="Contraseña" name="_password" required autofocus/>
-          <input type="hidden" name="_target_path" value="innobis_observation_list"/>
-          <button type="submit" class="submit__btn">Ingresar</button>
-        </form> 
-    </div>
-  </body>
+{% block client %}
+  	<body class="bg-otonal">
+	    <a href="{{ path('innobis_homepage') }}"><img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/></a>
+	    <div class="cotizador--fixed">
+	      	<form action="{{path('innobis_check')}}" method="post" class="formulario__datos formulario__login">
+		        <h2>Inicia Sesión</h2>
+		        <h6>Acceso Administración</h6>
+	       		{% if error %}<div class="text-dange"><p><strong>{{ error.messageKey }}</strong></p></div>{% endif %}
+		        <input id="emailHolder" type="email" placeholder="Email" name="_email" value="{{last_username}}" required autofocus/>
+		        <input id="passHolder" type="password" placeholder="Contraseña" name="_password" required autofocus/>
+		        <input type="hidden" name="_target_path" value="innobis_admin_observations"/>
+		        <button type="submit" class="submit__btn">Ingresar</button>
+	        </form> 
+	    </div>
+  	</body>
 {% endblock %}

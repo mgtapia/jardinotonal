@@ -1,0 +1,150 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block body %}
+	<body class="bg-info3">
+		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">
+			<div class="col-md-offset-2 col-md-8">
+		      	<div class="page-header margin-none txtwhite">
+		      		{% for reclamo in reclamos %}
+						{% if reclamo.id == id %}
+		      				{% for cliente in clientes %}
+								{% if cliente.rut == reclamo.rut %}
+		      						<h1 style="margin-top:100px">{{cliente.nombre}}</h1>
+				      			{% endif %}
+							{% endfor %}
+		      			{% endif %}
+					{% endfor %}
+		      	</div>
+			    <div class="table-responsive">
+			      	<table class="table table-striped table-hover">
+				      	<thead>
+					      	<tr class="txtwhite">
+								<th>Rut</th>
+								<th>Vivienda</th>
+								<th>Recinto</th>
+								<th>Ingreso</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for reclamo in reclamos %}
+							{% if reclamo.id == id %}
+							<tr>
+								<td>{{ reclamo.rut }}</td>
+								<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
+								<td>{{ reclamo.recinto }}</td>
+								<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
+								<td>{% if reclamo.fechaSolucion != NULL and
+								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+								<i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i>{% else %}
+								<i class="glyphicon glyphicon-time time" title="Pendiente"></i>{% endif %}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+						</tbody>
+			      	</table>
+			      	<table class="table table-striped table-hover">
+						<tbody>
+						{% for reclamo in reclamos %}
+							{% if reclamo.id == id %}
+							<tr>
+								<td title="Detalle">{{ reclamo.detalle }}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+						</tbody>
+			      	</table>
+			      	<table class="table table-striped table-hover">
+				      	<thead>
+					      	<tr style="color:#fff">
+								<th>Categoría</th>
+								<th>Grevedad</th>
+								<th>Observación</th>
+								<th>Solución</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for reclamo in reclamos %}
+							{% if reclamo.id == id %}
+							<tr>
+								<td>{% if reclamo.categoria != "" %}{{ reclamo.categoria }}{% else %}-{% endif %}</td>						
+								<td>{% if reclamo.gravedad != "" %}{{ reclamo.gravedad }}{% else %}-{% endif %}</td>
+								<td>{% if reclamo.observacion != "" %}{{ reclamo.observacion }}</td>{% else %}No hay observaciones{% endif %}</td>	
+								<td>{% if reclamo.fechaSolucion != NULL and
+								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+								{{ reclamo.fechaSolucion|date('d-m-Y') }}{% else %}Pendiente{% endif %}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+						</tbody>
+			      </table>
+			    </div>
+			</div>
+			<div class="Title text-center">
+			    <div class="clear2"></div><br/>
+			    <h2 class="txtwhite">Administrador</h2>
+			</div>
+			<div class="col-xs-12 col-sm-8 col-md-6 col-center">
+				{{ form_start(form, {'attr': {'role':'form', 'novalidate': 'novalidate'}}) }}
+			    <fieldset>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Categoría</label>
+			      		{{ form_widget(form.categoria, {'attr':{'placeholder':'Categoria', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.categoria) }}</span>
+			      	</div>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Gravedad</label>
+			      		{{ form_widget(form.gravedad, {'attr':{'placeholder':'Gravedad', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.gravedad) }}</span>
+			      	</div>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Observación</label>
+			      		{{ form_widget(form.observacion, {'attr':{'placeholder':'Observación', 'class':'form-control hh'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.observacion) }}</span>
+			      	</div>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Solución</label>
+			      		{{ form_widget(form.fechaSolucion, {'attr':{'placeholder':'Solución', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.fechaSolucion) }}</span>
+			      	</div>
+			    </fieldset>
+			    <p class="text-center">{{ form_widget(form.save, {'attr':{'class':'btn btn-primary form-control','label':'Enviar'}}) }}</p>
+		      	{{ form_end(form) }}
+				<div class="clear2"></div><br/>
+			</div>
+			<div class="col-md-8 col-center">	    
+			    <div class="well">
+			    	<h4>Ayuda</h4>
+			    	<h6>&emsp;</h6>
+			    	<h5 class="help"><b>Gravedad 1:</b> Estas observaciones son catalogadas como emergencias, ponen en riesgo la vida de los propietarios o comprometen su salud gravemente. <b>Máx de solución en el dia</b></h5>
+			    	<h6><b>&emsp;&emsp;Gas</b> -Fuga de gas.</h6>
+			    	<h6><b>&emsp;&emsp;Electricidad</b> -Riesgo de shock electrico.</h6>
+			    	<h6>&emsp;</h6>
+			    	<h5><b>Gravedad 2:</b> Observaciones que pueden significar un deterioro de gran costo o una gran molestia para el propietario, principalmente ligada a los elementos basicos. <b>Máx de solución 7 días</b></h5>
+			    	<h6><b>&emsp;&emsp;Agua</b> -Filtraciones de cualquier tipo -Humedad que puede implicar filtración 
+			    		-Sin agua -Obstruccion en los ductos.</h6>
+			    	<h6><b>&emsp;&emsp;Caldera</b> -No funciona -Funcionamiento insatisfactorio -Problemas de despiche.</h6>
+			    	<h6><b>&emsp;&emsp;Electricidad</b> -Corto circuito. -Problemas en tablero. -Cables sin aislante o dañados. -Problemas de tierra.</h6>
+			    	<h6><b>&emsp;&emsp;Muros</b> -Grietas -Inestabilidad de medianeros</h6>
+			    	<h6><b>&emsp;&emsp;Tapas</b> -Ausencia de tapas, alcantarillado, electricas, etc.</h6>
+			    	<h6><b>&emsp;&emsp;Seguridad</b> -Ventana no cierra -Problemas en cerradura puerta.</h6>
+			    	<h6>&emsp;</h6>
+			    	<h5><b>Gravedad 3:</b> Observaciones de gravedad media, no involucran necesariamente riesgos ni costos mayores pero si molestia. <b>Máx de solución 15 días</b></h5>
+			    	<h6><b>&emsp;&emsp;Citófonos</b> -No funciona 	-No suena</h6>
+			    	<h6><b>&emsp;&emsp;Corrientes Débiles</b> -Ductos tapados -Sin conexión</h6>
+			    	<h6><b>&emsp;&emsp;Techumbre</b> -Tejas.</h6>
+			    	<h6><b>&emsp;&emsp;Portones</b> -No cierra.</h6>
+			    	<h6>&emsp;</h6>
+			    	<h5><b>Gravedad 4:</b> No afectan la seguridad del propietario, representan errores tipicos de construcción, no esta relacionado con el costo de su reparación el que podria ser alto. <b>Máx de solución 30 días</b></h5>
+			    	<h6><b>&emsp;&emsp;Muros</b> -Pinturas -Fisuras -Rayas -Desaplome</h6>
+			    	<h6><b>&emsp;&emsp;Accesorios</b> -Faltan -Estan dañados -Problemas</h6>
+			    	<h6><b>&emsp;&emsp;Jardín</b> -No terminado -Estacionamiento</h6>
+			    	<h6><b>&emsp;&emsp;Varios</b> -Todo lo no definido por gravedad 1, 2 o 3.</h6>
+			    </div>
+			      	<div class="clear2"></div>
+			      	<div class="clear2"></div>
+			</div>
+		</div>
+	    {{ parent() }}
+	</body>
+{% endblock %}

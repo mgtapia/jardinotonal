@@ -1,0 +1,74 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<body class="bg-info3">
+		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">
+			<div class="container-fluid">
+				<div class="col-md-offset-2 col-md-8">
+			      	<div class="page-header margin-none txtwhite">
+			      		<h1 style="margin-top:100px">Asignar Departamento</h1>
+			      	</div>
+			      	{% set users = [] %}
+			      	{% for cliente in clientes %}
+			      		{% set count = 0 %}
+						{% for depto in deptos %}
+							{% if cliente.rut == depto.rutDueno %}
+								{% set count = count + 1 %}
+							{% endif %}
+			      		{% endfor %}
+			      		{% if count == 0 %}
+			      			{% set users = users|merge([cliente]) %}
+			      		{% endif %}
+			      	{% endfor %}
+			      	{% if users|length > 0 %}
+					    <table class="table table-striped table-hover">
+					      	<thead>
+						      	<tr class="txtwhite">
+									<th>#</th>
+									<th>Rut</th>
+									<th>Nombre</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody style="background:rgba(220,220,220,.95)">
+							{% for cliente in users %}
+								<tr>	
+									<td>{{ loop.index }}</td>
+									<td>{{ cliente.rut }}</td>
+									<td>{{ cliente.nombre }}</td>
+									<td>Nuevo</td>							
+								</tr>
+							{% endfor %}
+							</tbody>
+				     	</table>
+					{% else %}
+						<h4 class="txtwhite txtshadow">No hay nuevos clientes registrados en nuestra base de datos.</h4>
+					{% endif %}    	
+					<div class="col-xs-12 col-sm-8 col-md-8 col-center">
+				    {{ form_start(form, {'attr': {'role':'form'}}) }}
+				    <fieldset>
+				      	<div class="form-group"><br/>
+				      		<h3 class="txtwhite text-center txtshadow">
+							{% for depto in deptos %}
+								{% if depto.id == id %}
+									Ingresar Rut del Propietario del Depto {{ depto.departamento }}-{{ depto.torre }}
+								{% endif %}
+							{% endfor %}
+				      		</h3>
+				      		{{ form_widget(form.rutDueno, {'attr':{'placeholder':'Ingrese Rut', 'class':'form-control'}}) }}
+				      		<span class="text-danger">{{ form_errors(form.rutDueno) }}</span><br/>
+				      		{{ form_widget(form.save, {'attr':{'class':'btn btn-primary form-control '}}) }}
+				      	</div>
+				    </fieldset>
+				    <p>{{ form_widget(form.save, {'attr':{'class':'btn','label':'Asignar'}}) }}</p>
+			      	{{ form_end(form) }}
+			      	<div class="clear2"></div>
+			      	<div class="clear2"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{ parent() }}
+	</body>
+{% endblock %}

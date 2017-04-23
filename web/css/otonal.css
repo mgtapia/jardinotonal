@@ -92,3 +92,28 @@ i.time
 {
     color: red;
 }
+.well th
+{
+    text-shadow: none;
+}
+.m2b
+{
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    bottom: 20px;
+}
+.m2b a
+{
+    color: #3f94be;
+    cursor: pointer;
+}
+.m2b a:hover, .m2b a:focus
+{
+    color: #16bfff;
+    text-decoration: none;
+}
+h1, th, .txtshadow
+{
+    text-shadow: 1px 1px black;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-04-2017 a las 01:31:45
+-- Tiempo de generación: 23-04-2017 a las 12:42:47
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clientes` (
-  `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL,
   `rut` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `nombre` mediumtext COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -37,40 +37,40 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `rut`, `nombre`) VALUES
-('1', '10128575-8', 'MIGUEL LUIS ESPERIDION VIDELA'),
-('10', '15377046-8', 'ANDREA JADUE'),
-('11', '15377575-3', 'PABLO FERNANDO MILLAR TALCIANI'),
-('12', '15640216-8', 'CARLOS BINDER'),
-('13', '16097493-1', 'ANDRES DOMINGO CARNÉ CORDERO'),
-('14', '16210291-5', 'NICOLE SCHLESINGER/FELIPE DERADO'),
-('15', '16656748-3', 'MATÍAS VARGAS HERRERA'),
-('16', '17266863-1', 'VALENTINA VERONICA HERRERA FIGUEROA'),
-('17', '23288005-8', 'ETEL VERINGA'),
-('18', '24423670-7', 'CARLOS PAEZ/FERNANDA HUMPIERRES '),
-('19', '2850653-8', 'GRACIELA DEL CARMEN MIRANDA YAÑEZ'),
-('2', '10355703-8', 'MARCO ANDRES VALENZUELA AGUILERA'),
-('20', '4289328-5', 'ANTONIO SOLA VALVERDE'),
-('21', '4774405-9', 'JUAN CARLOS ZAMORA GAMEZ'),
-('22', '4779335-1', 'ESTEBAN FILLOL DURAN'),
-('23', '5599998-8', 'TOMAS COX FERNANDEZ'),
-('24', '6025638-1', 'CENTRO ACOND. FISICO CARMEN ROZAS B EIRL'),
-('25', '6035678-5', 'MARIANELA ROJAS SHEGGIA'),
-('26', '6813891-4', 'RENE TAPIA'),
-('27', '6975584-4', 'ALBERTO CARLOS ENRIQUE OVIEDO GARCÉS'),
-('28', '7019209-8', 'ROSA ISABEL DEZA MENESES'),
-('29', '7019487-2', 'XIMENA CAMPODONICO'),
-('3', '10365994-9', 'MILKA MARLE ORLIC JACOB'),
-('30', '7054308-7', 'GABRIEL ANTONIO VASQUEZ'),
-('31', '7937577-2', 'SOLEDAD SARADUA NIETO/ANDRES WARNER'),
-('32', '9355289-K', 'ANGELA MOVILLO HERMOSILLA'),
-('33', '9441345-1', 'JAIME PIMENTEL SEBALLOS'),
-('34', '9485837-2', 'IGOR SOLIS GATICA'),
-('4', '10939754-7', 'DINKA BASIC/JUAN PABLO CARDENAS'),
-('5', '11635174-9', 'KARLA CRISTINA ARAVENA ARELLANO'),
-('6', '12627993-0', 'MARIA SOLEDAD URZUA BAQUEDANO'),
-('7', '12893093-0', 'FREDDY VELOSO'),
-('8', '13357949-4', 'JULIO ENRIQUE CIFUENTES VARGAS'),
-('9', '14543737-7', 'ROBERTO DE CAMPOS/M. DE LOS ANGELES BLAITT');
+(1, '10128575-8', 'MIGUEL LUIS ESPERIDION VIDELA'),
+(2, '10355703-8', 'MARCO ANDRES VALENZUELA AGUILERA'),
+(3, '10365994-9', 'MILKA MARLE ORLIC JACOB'),
+(4, '10939754-7', 'DINKA BASIC/JUAN PABLO CARDENAS'),
+(5, '11635174-9', 'KARLA CRISTINA ARAVENA ARELLANO'),
+(6, '12627993-0', 'MARIA SOLEDAD URZUA BAQUEDANO'),
+(7, '12893093-0', 'FREDDY VELOSO'),
+(8, '13357949-4', 'JULIO ENRIQUE CIFUENTES VARGAS'),
+(9, '14543737-7', 'ROBERTO DE CAMPOS/M. DE LOS ANGELES BLAITT'),
+(10, '15377046-8', 'ANDREA JADUE'),
+(11, '15377575-3', 'PABLO FERNANDO MILLAR TALCIANI'),
+(12, '15640216-8', 'CARLOS BINDER'),
+(13, '16097493-1', 'ANDRES DOMINGO CARNÉ CORDERO'),
+(14, '16210291-5', 'NICOLE SCHLESINGER/FELIPE DERADO'),
+(15, '16656748-3', 'MATÍAS VARGAS HERRERA'),
+(16, '17266863-1', 'VALENTINA VERONICA HERRERA FIGUEROA'),
+(17, '23288005-8', 'ETEL VERINGA'),
+(18, '24423670-7', 'CARLOS PAEZ/FERNANDA HUMPIERRES '),
+(19, '2850653-8', 'GRACIELA DEL CARMEN MIRANDA YAÑEZ'),
+(20, '4289328-5', 'ANTONIO SOLA VALVERDE'),
+(21, '4774405-9', 'JUAN CARLOS ZAMORA GAMEZ'),
+(22, '4779335-1', 'ESTEBAN FILLOL DURAN'),
+(23, '5599998-8', 'TOMAS COX FERNANDEZ'),
+(24, '6025638-1', 'CENTRO ACOND. FISICO CARMEN ROZAS B EIRL'),
+(25, '6035678-5', 'MARIANELA ROJAS SHEGGIA'),
+(26, '6813891-4', 'RENE TAPIA'),
+(27, '6975584-4', 'ALBERTO CARLOS ENRIQUE OVIEDO GARCÉS'),
+(28, '7019209-8', 'ROSA ISABEL DEZA MENESES'),
+(29, '7019487-2', 'XIMENA CAMPODONICO'),
+(30, '7054308-7', 'GABRIEL ANTONIO VASQUEZ'),
+(31, '7937577-2', 'SOLEDAD SARADUA NIETO/ANDRES WARNER'),
+(32, '9355289-K', 'ANGELA MOVILLO HERMOSILLA'),
+(33, '9441345-1', 'JAIME PIMENTEL SEBALLOS'),
+(34, '9485837-2', 'IGOR SOLIS GATICA');
 
 -- --------------------------------------------------------
 
@@ -270,21 +270,13 @@ CREATE TABLE `reclamos` (
   `departamento` int(11) NOT NULL,
   `torre` varchar(11) NOT NULL,
   `fechaReclamo` date NOT NULL,
-  `fechaSolucion` date NOT NULL,
+  `fechaSolucion` date DEFAULT NULL,
   `gravedad` int(11) NOT NULL,
   `observacion` text NOT NULL,
   `recinto` varchar(255) NOT NULL,
   `detalle` text NOT NULL,
   `categoria` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `reclamos`
---
-
-INSERT INTO `reclamos` (`id`, `rut`, `departamento`, `torre`, `fechaReclamo`, `fechaSolucion`, `gravedad`, `observacion`, `recinto`, `detalle`, `categoria`) VALUES
-(7, '6813891-4', 102, 'B', '2017-04-20', '2017-04-21', 1, 'S1', 'BAÑO 1 PPAL', 'Se tapo el baño', 'Pre Entrega'),
-(8, '15377046-8', 206, 'A', '2017-04-20', '0000-00-00', 0, '', 'DORM 2', 'Me cai de la cama!', '');
 
 -- --------------------------------------------------------
 
@@ -305,9 +297,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
-(1, 'Matías', 'Tapia', 'mgtapia@uc.cl', '$2y$12$Am0E2wBvQsAGH1INJBdfJe3uBtri847hPFnduLvDk33wDwzZUGnw6'),
-(2, 'Pablo', 'Rios', 'perios@uc.cl', '$2y$12$BKnAgL.GoanXfueZfA9CLuWF7aiZS6ESukHaZvYveEE3SqU.N48vS'),
-(25, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq');
+(1, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq'),
+(2, 'Max', 'Villalobos', 'mvillalobos@agenciaout.cl', '$2y$12$gNxKPnjLUI30q3RBdTZlgO//2ZG4UwapGejqZJ9CQXIGA4Uw2waJa');
 
 -- --------------------------------------------------------
 
@@ -412,15 +403,20 @@ ALTER TABLE `viviendas`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+--
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
 ALTER TABLE `reclamos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT de la tabla `viviendas`
 --

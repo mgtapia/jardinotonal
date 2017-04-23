@@ -1,0 +1,38 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block body %}
+	<body class="bg-info3">
+		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">
+		  	<div class="col-md-offset-2 col-md-8">
+		      	<div class="page-header margin-none txtwhite">
+		      		<h1 style="margin-top:100px">Administradores</h1>
+		      	</div>
+			    <div class="table-responsive">
+			      	<table class="table table-striped table-hover">
+				      	<thead>
+					      	<tr class="txtwhite">
+								<th>#</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Correo</th>
+							</tr>
+						</thead>
+						<tbody style="background:rgba(220,220,220,.95)">
+						{% for user in users|reverse %}
+							<tr>
+								<td>{{ loop.index }}</td>
+								<td>{{ user.firstname }}</td>
+								<td>{{ user.lastname }}</td>
+								<td>{{ user.email }}</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+			      	</table>
+			      	<div class="clear2"></div>
+			      	<div class="clear2"></div>
+			    </div>
+			</div>
+		</div>
+	    {{ parent() }}
+	</body>
+{% endblock %}

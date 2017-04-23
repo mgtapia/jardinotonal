@@ -28,18 +28,12 @@
 				<td>{{ reclamo.recinto }}</td>
 				<td>{{ reclamo.detalle }}</td>
 				<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
-				{% if reclamo.fechaSolucion|date('d-m-Y') != ""|date('d-m-Y') %}
-				<td>{{reclamo.fechaSolucion|date('d-m-Y')}}</td>
-				{% else %}
-				<td>Pendiente</td>
-				{% endif %}
+				{% set solucionado = reclamo.fechaSolucion != NULL and
+					date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+				<td>{% if solucionado %}{{reclamo.fechaSolucion|date('d-m-Y')}}{% else %}Pendiente{% endif %}</td>				
 				<td>{{ loop.index }}</td>
-				<td>{{ reclamo.gravedad }}</td>
-				{% if reclamo.fechaSolucion|date('d-m-Y') != ""|date('d-m-Y') %}
-				<td>{{ reclamo.fechaSolucion|date('d-m-Y')-reclamo.fechaReclamo|date('d-m-Y') }}</td>
-				{% else %}
-				<td> </td>
-				{% endif %}
+				<td>{% if reclamo.gravedad != 0 %}{{ reclamo.gravedad }}{% endif %}</td>
+				<td>{% if solucionado %}{{ date(reclamo.fechaSolucion).diff(date(reclamo.fechaReclamo)).days }}{% endif %}</td>
 				<td>{{ reclamo.observacion }}</td>
 				<td>{{ reclamo.categoria }}</td>
 			</tr>

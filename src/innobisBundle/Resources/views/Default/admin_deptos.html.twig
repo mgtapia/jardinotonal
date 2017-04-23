@@ -1,0 +1,48 @@
+{% extends 'innobisBundle::main.html.twig' %}
+
+{% block body %}
+	<body class="bg-info3">
+		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">
+		  	<div class="col-md-offset-2 col-md-8">
+		      	<div class="page-header margin-none txtwhite">
+		      		<h1 style="margin-top:100px">Departamentos</h1>
+		      	</div>
+			    <div class="table-responsive">
+			      	<table class="table table-striped table-hover">
+				      	<thead>
+					      	<tr class="txtwhite">
+								<th>Vivienda</th>
+								<th>Tipo</th>
+								<th>Propietario</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody style="background:rgba(220,220,220,.95)">
+						{% for depto in deptos %}
+							<tr>
+								<td>{{ depto.departamento }}-{{ depto.torre }}</td>
+								<td>{{ depto.tipo }}</td>
+								{% if depto.rutDueno == "" %}<td></td>
+									<td><a href="{{ path('innobis_admin_to_assign',{'id':depto.id}) }}" title="Asignar a un Propietario">Asignar</a></td>
+								{% else %}
+									<td>{{ depto.rutDueno }}</td>
+									<td>
+									{% for cliente in clientes %}
+										{% if cliente.rut == depto.rutDueno %}
+											{{ cliente.nombre }}
+										{% endif %}
+									{% endfor %}
+									</td>	
+								{% endif %}	
+							</tr>
+						{% endfor %}
+						</tbody>
+			      	</table>
+			      	<div class="clear2"></div>
+			      	<div class="clear2"></div>
+			    </div>
+			</div>
+		</div>
+	    {{ parent() }}
+	</body>
+{% endblock %}

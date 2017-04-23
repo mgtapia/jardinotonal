@@ -60,6 +60,7 @@ class Reclamos
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_reclamo", type="date")
+     * @Assert\NotBlank()
      */
     private $fechaReclamo;
 
@@ -81,6 +82,7 @@ class Reclamos
      * @var string
      *
      * @ORM\Column(name="detalle", type="text")
+     * @Assert\NotBlank()
      */
     private $detalle;
 

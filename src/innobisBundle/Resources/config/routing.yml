@@ -1,85 +1,82 @@
 innobis_homepage:
     path:     /
     defaults: { _controller: innobisBundle:Default:index }
+innobis_check:
+    path:     /check
+    defaults: { _controller: innobisBundle:Security:check }
+innobis_logout:
+    path:     /logout
 
+#Administrador
 innobis_admin:
     path:     /admin
     defaults: { _controller: innobisBundle:Default:admin }
-innobis_users:
-    path:     /users
-    defaults: { _controller: innobisBundle:Default:users }
-innobis_signup:
+innobis_admin_clients:
+    path:     /clients
+    defaults: { _controller: innobisBundle:Default:adminClients }
+innobis_admin_deptos:
+    path:     /deptos
+    defaults: { _controller: innobisBundle:Default:adminDeptos }
+innobis_admin_excel:
+    path:     /observation_excel
+    defaults: { _controller: innobisBundle:Default:adminExcel }
+innobis_admin_list:
+    path:     /admin_list
+    defaults: { _controller: innobisBundle:Default:adminList }
+innobis_admin_new_client:
+    path:     /new_client
+    defaults: { _controller: innobisBundle:Default:adminNewClient }
+innobis_admin_observation:
+    path:     /observation/{id}
+    defaults: { _controller: innobisBundle:Default:adminObservation }
+innobis_admin_observations:
+    path:     /observation_list
+    defaults: { _controller: innobisBundle:Default:adminObservations }
+innobis_admin_signup:
     path:     /signup
-    defaults: { _controller: innobisBundle:Default:signup }
-innobis_create:
-    path:     /create
-    defaults: { _controller: innobisBundle:Default:create }
-    methods: POST
-innobis_delete:
-    path:     /delete/{id}
-    defaults: { _controller: innobisBundle:Default:delete }
-    methods: [POST, DELETE]
+    defaults: { _controller: innobisBundle:Default:adminSignup }
+innobis_admin_to_assign:
+    path:     /depto/{id}
+    defaults: { _controller: innobisBundle:Default:adminToAsign }
+
+#Cliente
 innobis_client:
     path:     /client/{id}
     defaults: { _controller: innobisBundle:Default:client }
-innobis_asignar:
-    path:     /newdepto/{id}
-    defaults: { _controller: innobisBundle:Default:asignar }
-
-innobis_check:
-    path:   /check
-    defaults: { _controller: innobisBundle:Security:check }
-innobis_logout:
-    path:   /logout
-
-innobis_clients:
-    path:     /clients
-    defaults: { _controller: innobisBundle:Security:clients }
-
-innobis_observation:
-    path:     /observation
-    defaults: { _controller: innobisBundle:Default:observation }
-    methods: POST
-innobis_create_client:
-    path:     /create_client
-    defaults: { _controller: innobisBundle:Security:create }
-    methods: POST
-innobis_enter:
+innobis_client_enter:
     path:     /home
     defaults: { _controller: innobisBundle:Default:enter }
     methods: POST
-
-innobis_redirect_signup:
-    path:     /create
-    defaults:
-        _controller: innobisBundle:Default:signup
-        path: /signup
-        permanent: true
-innobis_redirect_client:
-    path:     /create_client
-    defaults:
-        _controller: innobisBundle:Security:clients
-        path: /clients
-        permanent: true
 innobis_redirect_enter:
     path:     /home
     defaults:
         _controller: innobisBundle:Default:index
         path: /
         permanent: true
+        
+innobis_observation:
+    path:     /client_obs
+    defaults: { _controller: innobisBundle:Default:observation }
+    methods: POST
 
-innobis_client_list:
-    path:     /client_list
-    defaults: { _controller: innobisBundle:Default:clientlist }
-innobis_observation_list:
-    path:     /observation_list
-    defaults: { _controller: innobisBundle:Default:observationlist }
-innobis_observation_excel:
-    path:     /observation_excel
-    defaults: { _controller: innobisBundle:Default:observationexcel }
-innobis_obs:
-    path:     /observation/{id}
-    defaults: { _controller: innobisBundle:Default:obsid }
-innobis_deptos:
-    path:     /deptos
-    defaults: { _controller: innobisBundle:Default:deptos }
+#Otro
+innobis_create:
+    path:     /create
+    defaults: { _controller: innobisBundle:Default:create }
+    methods: POST
+innobis_redirect_signup:
+    path:     /create
+    defaults:
+        _controller: innobisBundle:Default:signup
+        path: /signup
+        permanent: true
+innobis_new_client:
+    path:     /new
+    defaults: { _controller: innobisBundle:Default:newClient }
+    methods: POST
+innobis_redirect_new_client:
+    path:     /new
+    defaults:
+        _controller: innobisBundle:Default:adminNewClient
+        path: /clients
+        permanent: true

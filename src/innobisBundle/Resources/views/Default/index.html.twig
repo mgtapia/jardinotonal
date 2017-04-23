@@ -1,35 +1,23 @@
 {% extends 'innobisBundle::main.html.twig' %}
 
-{% block body %}
-  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    {{ include('innobisBundle:Default:menu.html.twig') }}
-    <body class="bg-otonal">
-        <img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/>
-    </body>
-  {% else %}
-  <div>
-  {% for flashMessage in app.session.flashbag.get('mensaje') %}
-    <div class="alert alert-success" role="alert">
-      <div class="container">{{ flashMessage }}</div>
-    </div>
-  {% endfor %}
-  <body class="bg-otonal">
-    <img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/>
-    <div class="cotizador--fixed">
-      <div class="formulario__datos formulario__login">
-          <h2>Inicia Sesión</h2>
-          <h6>Acceso Propietarios</h6>
-          {{ form_start(form, {'attr': {'role':'form'}}) }}
-          <fieldset>
-               <div class="form-group">
-                {{ form_widget(form.rut, {'attr':{'placeholder':'Ingresa con tu Rut'}}) }}
-                <span class="text-danger">{{ form_errors(form.rut) }}</span>
-              </div>
-          </fieldset>
-          <p>{{ form_widget(form.save, {'attr':{'class':'btn','label':'Ingresar'}}) }}</p>
-        {{ form_end(form) }}
-      </div>
-    </div>
+{% block client %}
+	<body class="bg-otonal">
+	    <a href="{{ path('innobis_admin') }}"><img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/></a>
+	    <div class="cotizador--fixed">
+		    <div class="formulario__datos formulario__login">
+		        <br/>
+		        <h2>Inicia Sesión</h2>
+		        <h6>Acceso Propietarios</h6>
+		        {{ form_start(form, {'attr': {'role':'form'}}) }}
+		            <fieldset>
+		                <div class="form-group">
+		                	{{ form_widget(form.rut, {'attr':{'placeholder':'Ingresa con tu Rut'}}) }}
+		                	<span class="text-danger">{{ form_errors(form.rut) }}</span>
+		              	</div>
+		           </fieldset>
+		           <p>{{ form_widget(form.save, {'attr':{'class':'btn','label':'Ingresar'}}) }}</p>
+		        {{ form_end(form) }}
+		    </div>
+	    </div> 
   </body>
-{% endif %}
 {% endblock %}
