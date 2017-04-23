@@ -18,6 +18,21 @@
 		           <p>{{ form_widget(form.save, {'attr':{'class':'btn','label':'Ingresar'}}) }}</p>
 		        {{ form_end(form) }}
 		    </div>
-	    </div> 
+	    </div>
   </body>
+{% endblock %}
+{% block admin %}
+	<body class="bg-otonal">
+	    <div style="text-align:center; background:rgba(0,0,0,0.2); height:100vh">
+			<a><img class="logo-otonal center-block" src="{{asset('img/logo.png')}}"/></a>
+			<h3 style="color:white">Bienvenido</h3>
+		</div>
+		<div style="background:rgba(0,0,0,0.1)">
+			<div class="col-md-offset-1 col-md-10" style="margin-top:-20px">
+			    <h6 class="m2b">&copy; {{"now"|date('Y')}}
+			    	<a href="https://fb.com/m2btech" target="_blank">M2B Technologies</a> IT Solutions
+			    </h6><br/>
+			</div>
+		</div>		    
+	</body>
 {% endblock %}
