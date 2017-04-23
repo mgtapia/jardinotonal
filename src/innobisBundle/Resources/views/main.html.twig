@@ -42,6 +42,15 @@
         	</script>
         </div>
     {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger message-alert" role="alert">
+          	<div class="container">{{ flashMessage }}</div>
+          	<script>
+            	setTimeout("$('.message-alert').fadeIn('slow')", 1000);
+          		setTimeout("$('.message-alert').fadeOut('slow')", 4000);
+        	</script>
+        </div>
+    {% endfor %}
 {% endblock %}
 	
 {% block javascripts %}

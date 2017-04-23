@@ -38,35 +38,43 @@ class SecurityController extends Controller
             {
                 $file = $form->get('submitFile');
                 $file = $file->getData();
+                $ext = explode(".", $file->getClientOriginalName());
+                $type = end($ext);
 
-                $handle = fopen($file,'r');
-                $count = 0; 
-                $handle = fopen("$file", "r"); 
-
-                while (($row = fgetcsv($handle, 1000, ";")) !== FALSE)
+                if ($type == "csv")
                 {
-                    $data[$count] = $row;
-                    $count = $count + 1;
-                }
+                    $handle = fopen($file,'r');
+                    $count = 0; 
+                    $handle = fopen("$file", "r"); 
 
-                $em=$this->getDoctrine()->getManager();
-
-                for ($i = 1; $i < $count; $i = $i + 1)
-                {
-                    if ($data[$i][0] != "" && $data[$i][1] != "") 
+                    while (($row = fgetcsv($handle, 1000, ";")) !== FALSE)
                     {
-                        $reclamo = new Reclamos();
-                        $reclamo
-                            ->setFechaReclamo(new \DateTime('now'))->setRut($form->get('rutDueno')->getData())
-                            ->setDepartamento($form->get('departamento')->getData())->setTorre($form->get('torre')->getData())
-                            ->setRecinto($data[$i][0])->setDetalle($data[$i][1])->setFechaSolucion(NULL)
-                            ->setGravedad("")->setCategoria("")->setObservacion("");
-                        $em->persist($reclamo);
-                        $em->flush();
+                        $data[$count] = $row;
+                        $count = $count + 1;
                     }
-                }
 
-                $this->addFlash('mensaje','Sus observacines han sido enviadas');
+                    $em=$this->getDoctrine()->getManager();
+
+                    for ($i = 1; $i < $count; $i = $i + 1)
+                    {
+                        if ($data[$i][0] != "" && $data[$i][1] != "") 
+                        {
+                            $reclamo = new Reclamos();
+                            $reclamo
+                                ->setFechaReclamo(new \DateTime('now'))->setRut($form->get('rutDueno')->getData())
+                                ->setDepartamento($form->get('departamento')->getData())->setTorre($form->get('torre')->getData())
+                                ->setRecinto($data[$i][0])->setDetalle($data[$i][1])->setFechaSolucion(NULL)
+                                ->setGravedad("")->setCategoria("")->setObservacion("");
+                            $em->persist($reclamo);
+                            $em->flush();
+                        }
+                    }
+                    $this->addFlash('mensaje','Sus observacines han sido enviadas');
+                } 
+                else
+                {
+                    $this->addFlash('error',"Intentelo nuevamente, el archivo seleccionado tiene un formato inválido");
+                }              
             }
          }
 
