@@ -39,7 +39,7 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="detalle" type="text" column="detalle" length="65536" nullable="false">
+    <field name="detalle" type="string" column="detalle" length="80" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
@@ -50,6 +50,11 @@
       </options>
     </field>
     <field name="recinto" type="text" column="recinto" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="responsable" type="string" column="responsable" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>

@@ -15,6 +15,7 @@
 								<th>Nombre</th>
 								<th>Apellido</th>
 								<th>Correo</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody style="background:rgba(220,220,220,.95)">
@@ -24,6 +25,30 @@
 								<td>{{ user.firstname }}</td>
 								<td>{{ user.lastname }}</td>
 								<td>{{ user.email }}</td>
+								<td>
+									<div>
+									  <i class="glyphicon glyphicon-remove time" title="Eliminar"  type="button" data-toggle="modal" data-target="#myModal" style="cursor:pointer"></i>
+
+									  <div class="modal fade" id="myModal" role="dialog">
+									    <div class="modal-dialog">									    
+									      <div class="modal-content">
+									        <div class="modal-header">
+									          <button type="button" class="close" data-dismiss="modal">&times;</button>
+									          <h4 class="modal-title">Solicitud de Confirmación</h4>
+									        </div>
+									        <div class="modal-body">
+									          <p>Si borra este usuario no podrá ser recuperado</p>
+									        </div>
+									        <div class="modal-footer">
+									        	<a class="link" href="{{path('innobis_admin_delete',{'id':user.id})}}"><button class="btn btn-danger">Eliminar</button></a>
+									          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									        </div>
+									      </div>	      
+									    </div>
+									  </div>
+									  
+									</div>				
+								</td>
 							</tr>
 						{% endfor %}
 						</tbody>

@@ -32,6 +32,12 @@ class SolutionType extends AbstractType
                     '4'=>'4: Muros - Accesorios - Jardín - Varios'
                 )
             ))
+            ->add('responsable', ChoiceType::class, array(
+                'placeholder' => 'SELECCIONA UN RESPONSABLE', 'choices' => array(       
+                    'Constructora'=>'Constructora',
+                    'Inmobiliaria'=>'Inmobiliaria'
+                )
+            ))
             ->add('fechaSolucion','date')
             ->add('observacion', TextareaType::class)
             ->add('save','submit', array('label'=>'Enviar'))

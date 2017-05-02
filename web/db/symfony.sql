@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-04-2017 a las 12:42:47
+-- Tiempo de generación: 02-05-2017 a las 20:26:49
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -275,7 +275,8 @@ CREATE TABLE `reclamos` (
   `observacion` text NOT NULL,
   `recinto` varchar(255) NOT NULL,
   `detalle` text NOT NULL,
-  `categoria` varchar(255) NOT NULL
+  `categoria` varchar(255) NOT NULL,
+  `responsable` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -406,7 +407,7 @@ ALTER TABLE `viviendas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
@@ -416,7 +417,7 @@ ALTER TABLE `reclamos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `viviendas`
 --

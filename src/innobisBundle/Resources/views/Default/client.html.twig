@@ -13,7 +13,7 @@
 			{{ include('innobisBundle:Default:client_menu.html.twig') }}
 			<div class="Title text-center">
 			    <div class="clear2"></div><div class="clear2"></div><br/>
-			    <h1 class="txtwhite">Observaciones</h1><br/>
+			    <h1 class="txtwhite">Observaciones</h1><br/>			    
 			</div>
 		    <div class="col-xs-12 col-sm-8 col-md-4 col-center">
 		    	{{ form_start(form, {'attr': {'role':'form'}}) }}
@@ -39,7 +39,7 @@
 
 					<div class="form-group">
 			      		<label class="txtwhite">Detalle</label>
-			      		{{ form_widget(form.detalle, {'attr':{'placeholder':'Escribenos','class':'form-control hh'}} ) }}
+			      		{{ form_widget(form.detalle, {'attr':{'placeholder':'Máximo 80 caracteres','class':'form-control hh'}} ) }}
 			      		<span class="text-danger">{{ form_errors(form.detalle) }}</span>
 			      	</div>
 			      	<div class="form-group hide">
@@ -58,7 +58,7 @@
 		<div style="background:rgba(0,0,0,0.1)">
 			<div class="col-md-offset-1 col-md-10" style="margin-top:-20px">
 			    <h6 class="m2b">&copy; {{"now"|date('Y')}}
-			    	<a href="https://fb.com/m2btech" target="_blank">M2B Technologies</a> IT Solutions
+			    	<a href="http://www.m2btech.cl" target="_blank">M2B Technologies</a> IT Solutions
 			    </h6><br/>
 			</div>
 		</div>

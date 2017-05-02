@@ -23,6 +23,7 @@
 								<th>Vivienda</th>
 								<th>Recinto</th>
 								<th>Ingreso</th>
+								<th>Solución</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -34,6 +35,9 @@
 								<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
 								<td>{{ reclamo.recinto }}</td>
 								<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
+								<td>{% if reclamo.fechaSolucion != NULL and
+								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+								{{ reclamo.fechaSolucion|date('d-m-Y') }}{% else %}Pendiente{% endif %}</td>
 								<td>{% if reclamo.fechaSolucion != NULL and
 								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
 								<i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i>{% else %}
@@ -58,9 +62,10 @@
 				      	<thead>
 					      	<tr style="color:#fff">
 								<th>Categoría</th>
-								<th>Grevedad</th>
+								<th>Gravedad</th>
+								<th>Responsable</th>
 								<th>Observación</th>
-								<th>Solución</th>
+								<th>Supr.</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -68,11 +73,33 @@
 							{% if reclamo.id == id %}
 							<tr>
 								<td>{% if reclamo.categoria != "" %}{{ reclamo.categoria }}{% else %}-{% endif %}</td>						
-								<td>{% if reclamo.gravedad != "" %}{{ reclamo.gravedad }}{% else %}-{% endif %}</td>
-								<td>{% if reclamo.observacion != "" %}{{ reclamo.observacion }}</td>{% else %}No hay observaciones{% endif %}</td>	
-								<td>{% if reclamo.fechaSolucion != NULL and
-								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
-								{{ reclamo.fechaSolucion|date('d-m-Y') }}{% else %}Pendiente{% endif %}</td>
+								<td>{% if reclamo.gravedad != "" %}{{ reclamo.gravedad }}{% else %}-{% endif %}</td>					
+								<td>{% if reclamo.responsable != "" %}{{ reclamo.responsable }}{% else %}-{% endif %}</td>
+								<td>{% if reclamo.observacion != "" %}{{ reclamo.observacion }}</td>{% else %}No hay observaciones{% endif %}</td>
+								<td>
+									<div>
+									  <i class="glyphicon glyphicon-remove time" title="Eliminar"  type="button" data-toggle="modal" data-target="#myModal" style="cursor:pointer"></i>
+
+									  <div class="modal fade" id="myModal" role="dialog">
+									    <div class="modal-dialog">									    
+									      <div class="modal-content">
+									        <div class="modal-header">
+									          <button type="button" class="close" data-dismiss="modal">&times;</button>
+									          <h4 class="modal-title">Solicitud de Confirmación</h4>
+									        </div>
+									        <div class="modal-body">
+									          <p>Si borra este reclamo no podrá ser recuperado</p>
+									        </div>
+									        <div class="modal-footer">
+									        	<a class="link" href="{{path('innobis_delete_observation',{'id':reclamo.id})}}"><button class="btn btn-danger">Eliminar</button></a>
+									          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									        </div>
+									      </div>	      
+									    </div>
+									  </div>
+									  
+									</div>				
+								</td>
 							</tr>
 							{% endif %}
 						{% endfor %}
@@ -96,6 +123,11 @@
 			      		<label class="txtwhite">Gravedad</label>
 			      		{{ form_widget(form.gravedad, {'attr':{'placeholder':'Gravedad', 'class':'form-control'}}) }}
 			      		<span class="text-danger">{{ form_errors(form.gravedad) }}</span>
+			      	</div>
+			      	<div class="form-group">
+			      		<label class="txtwhite">Responsable</label>
+			      		{{ form_widget(form.responsable, {'attr':{'placeholder':'Responsable', 'class':'form-control'}}) }}
+			      		<span class="text-danger">{{ form_errors(form.responsable) }}</span>
 			      	</div>
 			      	<div class="form-group">
 			      		<label class="txtwhite">Observación</label>

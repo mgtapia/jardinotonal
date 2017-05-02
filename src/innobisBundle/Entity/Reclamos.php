@@ -89,7 +89,13 @@ class Reclamos
     /**
      * @var string
      *
-     * @ORM\Column(name="observacion", type="text")
+     * @ORM\Column(name="observacion", type="string", length=80)
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 80,
+     *      minMessage = "Tu mensaje debe tener al menos {{ limit }} caracteres",
+     *      maxMessage = "Tu mensaje debe tener como máximo {{ limit }} caracteres"
+     * )
      */
     private $observacion;
 
@@ -100,6 +106,13 @@ class Reclamos
      * @Assert\NotBlank()
      */
     private $recinto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="responsable", type="string", length=255)
+     */
+    private $responsable;
 
 
     /**
@@ -350,6 +363,30 @@ class Reclamos
     public function getRecinto()
     {
         return $this->recinto;
+    }
+
+    /**
+     * Set responsable
+     *
+     * @param string $responsable
+     *
+     * @return Responsable
+     */
+    public function setResponsable($responsable)
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return string
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
     }
 }
 

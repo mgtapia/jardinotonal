@@ -21,10 +21,16 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody style="background:rgba(220,220,220,.95)">
+						<tbody style="background:rgba(220,220,220,.95)" id="tbody">					
+						{% set resuelto = [] %}				
+						{% set count = 1 %}
 						{% for reclamo in reclamos|reverse %}
-							<tr>	
-								<td>{{ loop.index }}</td>
+							{% if reclamo.fechaSolucion != NULL and
+								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+								{% set resuelto = resuelto|merge([reclamo]) %}
+							{% else %}
+								<tr>	
+								<td>{{ count }}</td>
 								<td>{{ reclamo.rut }}</td>
 								<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
 								<td>{{ reclamo.recinto }}</td>
@@ -34,13 +40,33 @@
 								<i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i>{% else %}
 								<i class="glyphicon glyphicon-time time" title="Pendiente"></i>{% endif %}</td>	
 								<td><a class="link" href="{{path('innobis_admin_observation',{'id':reclamo.id})}}" title="Ver detalles">Ver</a></td>
-							</tr>
+							</tr>			
+							{% set count = count + 1 %}
+							{% endif %}
+						{% endfor %}
+						{% for reclamo in resuelto %}	
+							<tr>	
+								<td>{{ count }}</td>
+								<td>{{ reclamo.rut }}</td>
+								<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
+								<td>{{ reclamo.recinto }}</td>
+								<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
+								<td>{% if reclamo.fechaSolucion != NULL and
+								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+								<i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i>{% else %}
+								<i class="glyphicon glyphicon-time time" title="Pendiente"></i>{% endif %}</td>	
+								<td><a class="link" href="{{path('innobis_admin_observation',{'id':reclamo.id})}}" title="Ver detalles">Ver</a></td>
+							</tr>						
+							{% set count = count + 1 %}
 						{% endfor %}
 						</tbody>
 			     	</table>
 			     	{% else %}
 			     		<h4 class="txtwhite txtshadow">No hay reclamos registrados en nuestra base de datos.</h4>
 			     	{% endif %}
+			     	<button id="myBtn">Try it</button>
+
+<p id="demo"></p>
 			      	<div class="clear2"></div>
 			      	<div class="clear2"></div>
 			    </div>
@@ -48,4 +74,11 @@
 		</div>
 	    {{ parent() }}
 	</body>
+	<script>
+		document.getElementById("myBtn").addEventListener("click", displayDate);
+
+		function displayDate() {
+		    document.getElementById("demo").innerHTML = Date();
+		}
+	</script>
 {% endblock %}

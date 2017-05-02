@@ -28,6 +28,8 @@ class DefaultController extends Controller
     public function enterAction(Request $request)
     {
         $rut = $this->enterCreateForm(new Clientes())->handleRequest($request)->get('rut')->getData();
+        $rut = implode("", explode(".", $rut));
+
         $check = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findByRut($rut);
         if ($check) { $check = 'Si'; } else { $check = 'No'; }
 
@@ -54,18 +56,38 @@ class DefaultController extends Controller
 
         if ($form->isValid())
         {
-            $reclamo
-                ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)
-                ->setGravedad("")->setCategoria("")->setObservacion("");
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($reclamo);
-            $em->flush();
+            $len = strlen($form->get('detalle')->getData());
+            if ($len <= 80)
+            {
+                $reclamo
+                    ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)
+                    ->setGravedad("")->setCategoria("")->setObservacion("")->setResponsable("");
+                $em=$this->getDoctrine()->getManager();
+                $em->persist($reclamo);
+                $em->flush();
 
-            $this->addFlash('mensaje','Su observación ha sido enviada');   
+                /*$message = \Swift_Message::newInstance()
+                    ->setSubject('Hello Email')
+                    ->setFrom('nombre@mail.cl')
+                    ->setTo('nombre@mail.cl')
+                    ->setBody('hola', 'text/plain')
+                ;
+                $this->get('mailer')->send($message);*/
+
+
+                $this->addFlash('mensaje','Su observación ha sido enviada');
+            }
+            else
+            {   
+                $this->addFlash('error', 'Su observación excede el máximo de caracteres');
+            }
         }
+
+        $rut = $form->get('rut')->getData();
+        $form = $this->observationCreateForm(new Reclamos());
         
         return $this->render('innobisBundle:Default:client.html.twig', array(
-            'id'=>$form->get('rut')->getData(), 'form'=>$form->createView(), 
+            'id'=>$rut, 'form'=>$form->createView(), 
             'clientes'=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll(), 
             'viviendas'=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll(), 
             'recintos'=>$this->getDoctrine()->getRepository("innobisBundle:RecintoVivienda")->findAll()
@@ -80,8 +102,8 @@ class DefaultController extends Controller
     }
     public function clientAction($id)
     {
-        return $this->render('innobisBundle:Default:client.html.twig',array( 
-            'id'=>$id,'form'=>$this->observationCreateForm(new Reclamos())->createView(),
+        return $this->render('innobisBundle:Default:client.html.twig', array( 
+            'id'=>$id, 'form'=>$this->observationCreateForm(new Reclamos())->createView(),
             'clientes'=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll(), 
             'recintos'=>$this->getDoctrine()->getRepository("innobisBundle:RecintoVivienda")->findAll(), 
             'viviendas'=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll()
@@ -94,7 +116,7 @@ class DefaultController extends Controller
     {
         $auth = $this->get('security.authentication_utils');
         return $this->render('innobisBundle:Default:admin.html.twig', 
-            array('last_username'=>$auth->getLastUsername(),'error'=>$auth->getLastAuthenticationError())
+            array('last_username'=>$auth->getLastUsername(), 'error'=>$auth->getLastAuthenticationError())
         );
     }
     public function adminListAction()
@@ -240,22 +262,88 @@ class DefaultController extends Controller
         $form = $this->newClientCreateForm($user);
         $form->handleRequest($request);
 
-        if($form->isValid())
+        if ($form->isValid())
         {
+            $rut = implode("", explode(".", $form->get('rut')->getData()));
             $user->setNombre(strtoupper($form->get('nombre')->getData()));
-            $user->setRut($form->get('rut')->getData());
-            
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $user->setRut($rut);
 
-            $this->addFlash('mensaje','El cliente ha sido creado');
-            return $this->render('innobisBundle:Default:admin_deptos.html.twig', array(
-                "deptos"=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll(), 
-                "clientes"=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll()
-                )
-            );
+            $check = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->findByRut($rut);
+            
+            if ($check) 
+            {
+                $this->addFlash('error','El cliente de rut '.$rut.' ya existe');
+            }
+            else
+            {
+                $em=$this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('mensaje','El cliente ha sido creado exitosamente');
+                return $this->render('innobisBundle:Default:admin_deptos.html.twig', array(
+                    "deptos"=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll(), 
+                    "clientes"=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll()
+                    )
+                );
+            }
         }
-        return $this->render('innobisBundle:Default:admin_clients.html.twig', array('form'=>$form->createView()));
+        return $this->render('innobisBundle:Default:admin_new_client.html.twig', array(
+            'form'=>$this->newClientCreateForm(new Clientes())->createView(),
+            'viviendas'=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll()
+            )
+        );
+    }
+    public function deleteObservationAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $reclamo = $em->getRepository('innobisBundle:Reclamos')->find($id);
+
+        if (!$reclamo) 
+        {
+            throw $this->createNotFoundException('El reclamo '.$id.' ya ha sido eliminado');
+        }
+        else
+        {
+            $em->remove($reclamo);
+            $em->flush();
+        }
+        
+        return $this->render('innobisBundle:Default:admin_observations.html.twig', 
+            array("reclamos"=>$this->getDoctrine()->getRepository("innobisBundle:Reclamos")->findAll())
+        );
+    }
+    public function deleteAction($id)
+    {  
+        $em = $this->getDoctrine()->getEntityManager();
+        $users = $this->getDoctrine()->getRepository("innobisBundle:Users")->findAll();
+        $count = 0;
+
+        foreach ($users as $i) 
+        {
+            $count++;
+        }
+
+        if ($count > 2) 
+        {     
+            $user = $em->getRepository('innobisBundle:Users')->find($id);
+
+            if (!$user) 
+            {
+                throw $this->createNotFoundException('El administrador '.$id.' ya ha sido eliminado');
+            }
+            else
+            {
+                $em->remove($user);
+                $em->flush();
+            }
+        }     
+        else
+        {   
+            $this->addFlash('error', 'No ha sido posible realizar la operación, debe haber un mínimo de 2 administradores');
+        }       
+        return $this->render('innobisBundle:Default:admin_list.html.twig', 
+            array("users"=>$this->getDoctrine()->getRepository("innobisBundle:Users")->findAll())
+        );  
     }
 }

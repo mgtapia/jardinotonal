@@ -38,6 +38,9 @@ innobis_admin_signup:
 innobis_admin_to_assign:
     path:     /depto/{id}
     defaults: { _controller: innobisBundle:Default:adminToAsign }
+innobis_admin_delete:
+    path:     /del/{id}
+    defaults: { _controller: innobisBundle:Default:delete }
 
 #Cliente
 innobis_client:
@@ -57,6 +60,9 @@ innobis_redirect_enter:
 innobis_observation:
     path:     /client_obs
     defaults: { _controller: innobisBundle:Default:observation }
+innobis_delete_observation:
+    path:     /delete/{id}
+    defaults: { _controller: innobisBundle:Default:deleteObservation }
     methods: POST
 innobis_import:
     path:     /import/{id}
@@ -64,7 +70,6 @@ innobis_import:
 innobis_loadCSV:
     path:     /importCSV
     defaults: { _controller: innobisBundle:Security:loadCSV }
-
 
 #Otro
 innobis_create:

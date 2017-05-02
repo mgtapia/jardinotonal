@@ -15,8 +15,8 @@
     	{{ include('innobisBundle:Default:menu.html.twig') }}
 	    <div style="background:rgba(0,0,0,0.1)">
 			<div class="col-md-offset-1 col-md-10" style="margin-top:-20px">
-			    <h6 class="m2b">&copy; {{"now"|date('Y')}}
-			    	<a href="https://fb.com/m2btech" target="_blank">M2B Technologies</a> IT Solutions
+			    <h6 class="m2b" style="background:rgba(0,0,0,0.2)">&copy; {{"now"|date('Y')}}
+			    	<a href="http://www.m2btech.cl" target="_blank">M2B Technologies</a> IT Solutions
 			    </h6><br/>
 			</div>
 			{% block admin %}{% endblock %}
@@ -54,6 +54,6 @@
 {% endblock %}
 	
 {% block javascripts %}
-	<script src="{{asset('js/jquery.min.js')}}"></script>
-	<script src="{{asset('js/bootstrap.min.js')}}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}
