@@ -15,8 +15,8 @@
       <ul class="nav navbar-nav">
         <li><a></a></li>
         <li><a href="{{ path('innobis_client',{'id':id}) }}"><i class="glyphicon glyphicon-list-alt"></i> Formulario</a></li>
-        <li><a href="{{ path('innobis_import',{'id':id}) }}"><i class="glyphicon glyphicon-import"></i> Importar CSV</a></li>
-        <li><a href="{{ asset('files/Formulario.csv') }}" download><i class="glyphicon glyphicon-download"></i> Descargar CSV</a></li>
+        <li class="hide"><a href="{{ path('innobis_import',{'id':id}) }}"><i class="glyphicon glyphicon-import"></i> Importar CSV</a></li>
+        <li class="hide"><a href="{{ asset('files/Formulario.csv') }}" download><i class="glyphicon glyphicon-download"></i> Descargar CSV</a></li>
       </ul>     
       <ul class="nav navbar-nav navbar-right">
 		<li><a>Propietario</a></li>

@@ -59,6 +59,14 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $password;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rol", type="string", length=255)
+     */
+    private $rol;
+
+
 
     public function __construct()
     {
@@ -121,6 +129,30 @@ class Users implements AdvancedUserInterface, \Serializable
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+    /**
+     * Set rol
+     *
+     * @param string $rol
+     *
+     * @return Users
+     */
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+
+        return $this;
+    }
+
+    /**
+     * Get rol
+     *
+     * @return string
+     */
+    public function getRol()
+    {
+        return $this->rol;
     }
 
     /**

@@ -59,5 +59,10 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="lista" type="integer" column="lista" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

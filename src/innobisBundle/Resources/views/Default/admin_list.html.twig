@@ -16,6 +16,10 @@
 								<th>Apellido</th>
 								<th>Correo</th>
 								<th></th>
+								<th></th>
+								{% if app.user.rol == "admin" %}
+									<th></th>
+								{% endif %}
 							</tr>
 						</thead>
 						<tbody style="background:rgba(220,220,220,.95)">
@@ -26,6 +30,17 @@
 								<td>{{ user.lastname }}</td>
 								<td>{{ user.email }}</td>
 								<td>
+									{% if app.user.rol == "admin" or app.user.id == user.id %}
+									<div>
+									  <a class="link" href="{{path('innobis_admin_password',{'id':user.id})}}">
+									  	<i class="glyphicon glyphicon-edit text-success" title="Cambiar Contraseña" style="cursor:pointer"></i>	
+									  </a>									 
+									</div>
+									{% endif %}				
+								</td>
+								{% if app.user.rol == "admin" %}
+								<td>
+									{% if user.rol == NULL %}
 									<div>
 									  <i class="glyphicon glyphicon-remove time" title="Eliminar"  type="button" data-toggle="modal" data-target="#myModal" style="cursor:pointer"></i>
 
@@ -46,8 +61,14 @@
 									      </div>	      
 									    </div>
 									  </div>
-									  
-									</div>				
+									</div>
+									{% endif %}	
+								</td>
+								{% endif %}		
+								<td>
+									{% if user.rol == "admin" %}
+										<i class="glyphicon glyphicon-user text-primary" title="SuperAdmin"></i>
+									{% endif %}
 								</td>
 							</tr>
 						{% endfor %}

@@ -34,7 +34,7 @@
 	{% endif %}
 
 	{% for flashMessage in app.session.flashbag.get('mensaje') %}
-        <div class="alert alert-success message-alert" role="alert">
+        <div class="alert alert-success message-alert" role="alert" style="top:52px; width:100%; height:auto; padding:0">
           	<div class="container">{{ flashMessage }}</div>
           	<script>
             	setTimeout("$('.message-alert').fadeIn('slow')", 1000);
@@ -43,7 +43,7 @@
         </div>
     {% endfor %}
     {% for flashMessage in app.session.flashbag.get('error') %}
-        <div class="alert alert-danger message-alert" role="alert">
+        <div class="alert alert-danger message-alert" role="alert" style="top:52px; width:100%; height:auto; padding:0">
           	<div class="container">{{ flashMessage }}</div>
           	<script>
             	setTimeout("$('.message-alert').fadeIn('slow')", 1000);

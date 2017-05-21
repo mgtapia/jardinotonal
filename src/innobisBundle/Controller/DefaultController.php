@@ -15,6 +15,8 @@ use innobisBundle\Entity\RecintoVivienda;
 use innobisBundle\Form\SolutionType;
 use innobisBundle\Form\EnterType;
 use innobisBundle\Form\AsignarType;
+use innobisBundle\Entity\Contador;
+use innobisBundle\Form\UpdateType;
 
 class DefaultController extends Controller
 {
@@ -53,17 +55,46 @@ class DefaultController extends Controller
         $reclamo = new Reclamos();
         $form = $this->observationCreateForm($reclamo);
         $form->handleRequest($request);
+        $rut = $form->get('rut')->getData();
 
         if ($form->isValid())
         {
             $len = strlen($form->get('detalle')->getData());
             if ($len <= 80)
             {
+                $lista = $this->getDoctrine()->getRepository('innobisBundle:Contador')->find(1);
+                $contador = $lista->getContador();
+
                 $reclamo
-                    ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)
+                    ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)->setLista($contador)
                     ->setGravedad("")->setCategoria("")->setObservacion("")->setResponsable("");
                 $em=$this->getDoctrine()->getManager();
                 $em->persist($reclamo);
+                $em->flush();
+
+                $rut = $form->get('rut')->getData();
+                $depto = $form->get('departamento')->getData();
+                $torre = $form->get('torre')->getData();
+
+                for ($i=2; $i <= 20; $i++) 
+                { 
+                    $detalle = $form->get('detalle'.$i)->getData();
+                    $recinto = $form->get('recinto'.$i)->getData();
+
+                    if (strlen($detalle) > 0 && strlen($recinto) > 0)
+                    {
+                        $reclamo = new Reclamos();
+                        $reclamo->setRut($rut)->setDepartamento($depto)->setTorre($torre)
+                            ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)->setLista($contador)
+                            ->setGravedad("")->setCategoria("")->setObservacion("")->setResponsable("")
+                            ->setDetalle($detalle)->setRecinto($recinto);
+                        $em->persist($reclamo);
+                        $em->flush();
+                    }
+                }
+
+                $lista->setContador($contador + 1);
+                $em->persist($lista);
                 $em->flush();
 
                 /*$message = \Swift_Message::newInstance()
@@ -74,17 +105,15 @@ class DefaultController extends Controller
                 ;
                 $this->get('mailer')->send($message);*/
 
-
                 $this->addFlash('mensaje','Su observación ha sido enviada');
+                $form = $this->observationCreateForm(new Reclamos());
             }
-            else
-            {   
+            else {   
                 $this->addFlash('error', 'Su observación excede el máximo de caracteres');
             }
-        }
-
-        $rut = $form->get('rut')->getData();
-        $form = $this->observationCreateForm(new Reclamos());
+        } else {   
+            $this->addFlash('error', 'Su observación excede el máximo de caracteres');
+        }    
         
         return $this->render('innobisBundle:Default:client.html.twig', array(
             'id'=>$rut, 'form'=>$form->createView(), 
@@ -122,7 +151,8 @@ class DefaultController extends Controller
     public function adminListAction()
     {
         return $this->render('innobisBundle:Default:admin_list.html.twig', 
-            array("users"=>$this->getDoctrine()->getRepository("innobisBundle:Users")->findAll())
+            array("users"=>$this->getDoctrine()->getRepository("innobisBundle:Users")->findAll(),
+                'form'=>$this->createCreateForm(new Users())->createView())
         );
     }  
     public function adminClientsAction()
@@ -217,6 +247,36 @@ class DefaultController extends Controller
             "deptos"=>$this->getDoctrine()->getRepository("innobisBundle:Viviendas")->findAll(), 
             "clientes"=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll()
             )
+        );
+    }
+    public function adminPasswordAction($id)
+    {
+        $update = $this->getDoctrine()->getRepository('innobisBundle:Users')->find($id);
+        $form = $this->createForm(new UpdateType(), $update);
+        $form->handleRequest($this->getRequest());
+
+        if ($form->isSubmitted()) 
+        {
+            if ($form->isValid())
+            {
+                $password = $form->get('password')->getData();
+                $encoder = $this->container->get('security.password_encoder');
+                $encoder = $encoder->encodePassword($update, $password);
+                $update->setPassword($encoder);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($update);
+                $em->flush();
+
+                $this->addFlash('mensaje','Los cambios han sido guardados');
+                return $this->render('innobisBundle:Default:admin_list.html.twig', 
+                    array("users"=>$this->getDoctrine()->getRepository("innobisBundle:Users")->findAll())
+                );
+            }
+        }
+        return $this->render('innobisBundle:Default:admin_password.html.twig', 
+            array("id"=>$id,"users"=>$this->getDoctrine()->getRepository("innobisBundle:Users")->findAll(),
+                'form'=>$this->createForm(new UpdateType(), new Users())->createView(), array('action'=>$this->generateUrl('innobis_update'),'method'=>'POST'))
         );
     }
 

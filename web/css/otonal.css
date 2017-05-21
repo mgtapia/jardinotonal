@@ -62,15 +62,14 @@
 }
 .hh
 {
-    height: 200px !important;
-    resize: vertical;
+    height: 80px !important;
+    max-height: 80px !important;
+    resize: none;
 }
 .message-alert
 {
     position: absolute;
-    top: 60px;
-    padding-left: 25px;
-    padding-right: 25px;
+    top: 50px !important;
     width: auto;
 }
 a.link, a.link:hover, a.link:focus

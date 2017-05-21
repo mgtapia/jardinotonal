@@ -41,6 +41,9 @@ innobis_admin_to_assign:
 innobis_admin_delete:
     path:     /del/{id}
     defaults: { _controller: innobisBundle:Default:delete }
+innobis_admin_password:
+    path:     /pass/{id}
+    defaults: { _controller: innobisBundle:Default:adminPassword }
 
 #Cliente
 innobis_client:
@@ -69,6 +72,9 @@ innobis_import:
 innobis_loadCSV:
     path:     /importCSV
     defaults: { _controller: innobisBundle:Security:loadCSV }
+innobis_update:
+    path:     /update
+    defaults: { _controller: innobisBundle:Default:update }
 
 #Otro
 innobis_create:

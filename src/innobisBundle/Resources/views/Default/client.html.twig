@@ -13,13 +13,14 @@
 			{{ include('innobisBundle:Default:client_menu.html.twig') }}
 			<div class="Title text-center">
 			    <div class="clear2"></div><div class="clear2"></div><br/>
-			    <h1 class="txtwhite">Observaciones</h1><br/>			    
+			    <h1 class="txtwhite">Observaciones</h1>
+			    <h6 class="txtwhite">Ingresa un máximo 20 observaciones</h6><br/>		    
 			</div>
 		    <div class="col-xs-12 col-sm-8 col-md-4 col-center">
 		    	{{ form_start(form, {'attr': {'role':'form'}}) }}
 			    <fieldset>
 			      	<div class="form-group">
-			      		<label class="txtwhite">Recinto</label>
+			      		<label class="txtwhite">Recinto 1</label>
 			      		{{ form_widget(form.recinto, {'attr':{'placeholder':'Recinto', 'class':'form-control'}}) }}
 			      		<span class="text-danger">{{ form_errors(form.recinto) }}</span>
 			      	</div>
@@ -38,8 +39,8 @@
 					{% endfor %}
 
 					<div class="form-group">
-			      		<label class="txtwhite">Detalle</label>
-			      		{{ form_widget(form.detalle, {'attr':{'placeholder':'Máximo 80 caracteres','class':'form-control hh'}} ) }}
+			      		{{ form_widget(form.detalle, 
+			      		{'attr':{"placeholder":"Máximo 80 caracteres","maxlength":80,'class':'form-control hh'}} ) }}
 			      		<span class="text-danger">{{ form_errors(form.detalle) }}</span>
 			      	</div>
 			      	<div class="form-group hide">
@@ -50,8 +51,246 @@
 			      		{{ form_widget(form.fechaReclamo, {'attr':{'placeholder':'Recinto','value':"now"|date("m/d/Y")}}) }}
 			      		<span class="text-danger">{{ form_errors(form.fechaReclamo) }}</span>
 			      	</div>
+						<br/>
+
+
+
+
+					<div class="hidden" id="recinto2">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 2</label>
+					 {{ form_widget(form.recinto2, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto2) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle2, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle2) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto3">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 3</label>
+					 {{ form_widget(form.recinto3, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto3) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle3, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle3) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto4">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 4</label>
+					 {{ form_widget(form.recinto4, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto4) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle4, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle4) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto5">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 5</label>
+					 {{ form_widget(form.recinto5, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto5) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle5, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle5) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto6">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 6</label>
+					 {{ form_widget(form.recinto6, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto6) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle6, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle6) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto7">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 7</label>
+					 {{ form_widget(form.recinto7, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto7) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle7, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle7) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto8">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 8</label>
+					 {{ form_widget(form.recinto8, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto8) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle8, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle8) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto9">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 9</label>
+					 {{ form_widget(form.recinto9, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto9) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle9, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle9) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto10">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 10</label>
+					 {{ form_widget(form.recinto10, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto10) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle10, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle10) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto11">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 11</label>
+					 {{ form_widget(form.recinto11, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto11) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle11, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle11) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto12">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 12</label>
+					 {{ form_widget(form.recinto12, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto12) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle12, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle12) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto13">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 13</label>
+					 {{ form_widget(form.recinto13, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto13) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle13, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle13) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto14">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 14</label>
+					 {{ form_widget(form.recinto14, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto14) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle14, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle14) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto15">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 15</label>
+					 {{ form_widget(form.recinto15, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto15) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle15, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle15) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto16">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 16</label>
+					 {{ form_widget(form.recinto16, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto16) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle16, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle16) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto17">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 17</label>
+					 {{ form_widget(form.recinto17, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto17) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle17, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle17) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto18">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 18</label>
+					 {{ form_widget(form.recinto18, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto18) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle18, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle18) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto19">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 19</label>
+					 {{ form_widget(form.recinto19, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto19) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle19, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle19) }}</span>
+					</div>
+						<br/>
+					</div>
+					<div class="hidden" id="recinto20">
+					<div class="form-group">
+					 <label class="txtwhite">Recinto 20</label>
+					 {{ form_widget(form.recinto20, {"attr":{"placeholder":"Recinto", "class":"form-control"}}) }}
+					 <span class="text-danger">{{ form_errors(form.recinto20) }}</span>
+					</div>	<div class="form-group">
+					 {{ form_widget(form.detalle20, 
+					 {"attr":{"placeholder":"Máximo 80 caracteres","maxlength":80,"class":"form-control hh"}} ) }}
+					 <span class="text-danger">{{ form_errors(form.detalle20) }}</span>
+					</div>	
+						<br/>
+					</div>
 			    </fieldset>
 			    <p class="text-center">{{ form_widget(form.save, {'attr':{'class':'btn btn-primary form-control','label':'Enviar'}}) }}</p>
+
+		      	<div class="form-group">
+		      		<a class="btn btn-success col-md-6" id="add">Agregar</a>
+		      		<a class="btn btn-danger col-md-6" id="remove">Eliminar</a>
+		      	</div><br/><br/><br/><br/><br/>
 		      	{{ form_end(form) }}
 		    </div>
 		</div>
@@ -64,4 +303,22 @@
 		</div>
 	</body>
 	{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		let count = 2;
+		$( "#remove" ).hide();
+		$( "#add" ).click(function() {
+		  	$( "#recinto".concat(count++) ).removeClass("hidden");
+		  	if (count > 20) { $( "#add" ).hide(); } 
+		  	if (count >= 3) {	$( "#remove" ).show(); }
+		});
+		$( "#remove" ).click(function() {
+		  	$( "#recinto".concat(--count) ).addClass("hidden");
+		  	if (count < 3) { $( "#remove" ).hide(); }
+		  	if (count <= 20) { $( "#add" ).show(); }
+		});
+	</script>
 {% endblock %}

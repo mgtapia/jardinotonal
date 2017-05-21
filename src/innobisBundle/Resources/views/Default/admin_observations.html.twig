@@ -3,10 +3,26 @@
 {% block body %}
 	<body class="bg-info2">
 		<div class="container-fluid" style="background:rgba(0,0,0,0.2); min-height:100vh">	
-		  	<div class="col-md-offset-2 col-md-8">
-		      	<div class="page-header margin-none txtwhite">
-		      		<h1 style="margin-top:100px">Reclamos</h1>
-		      	</div>
+		  	<div class="col-md-offset-1 col-md-10">
+		      	<div class="page-header margin-none row">
+		      		<div class="col-md-2">
+			      		<h1 style="margin-top:100px" class="txtwhite">Reclamos</h1>
+			      	</div>
+		      		<div style="margin-top:120px" class="col-md-10 visible-md visible-lg">	      		
+				      	<div class="col-md-offset-1 col-md-3">
+					     	<label class="txtwhite col-md-4">Rut</label>
+					      	<select id="frut" class="col-xs-12 col-md-8"><option value="Rut">Todos</option></select>
+				      	</div>
+				      	<div class="col-md-4">
+					     	<label class="txtwhite col-md-4">Vivienda</label>
+					      	<select id="fvivienda" class="col-xs-12 col-md-8"><option value="Vivienda">Todos</option></select>
+				      	</div>
+				      	<div class="col-md-4">
+					     	<label class="txtwhite col-md-4">Recinto</label>
+					      	<select id="frecinto" class="col-xs-12 col-md-8"><option value="Recinto">Todos</option></select>
+				      	</div>
+			      	</div>
+		      	</div>	      	
 			    <div class="table-responsive">
 			    	{% if reclamos|length > 0 %}
 			      	<table class="table table-striped table-hover">
@@ -22,51 +38,12 @@
 							</tr>
 						</thead>
 						<tbody style="background:rgba(220,220,220,.95)" id="tbody">					
-						{% set resuelto = [] %}				
-						{% set count = 1 %}
-						{% for reclamo in reclamos|reverse %}
-							{% if reclamo.fechaSolucion != NULL and
-								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
-								{% set resuelto = resuelto|merge([reclamo]) %}
-							{% else %}
-								<tr>	
-								<td>{{ count }}</td>
-								<td>{{ reclamo.rut }}</td>
-								<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
-								<td>{{ reclamo.recinto }}</td>
-								<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
-								<td>{% if reclamo.fechaSolucion != NULL and
-								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
-								<i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i>{% else %}
-								<i class="glyphicon glyphicon-time time" title="Pendiente"></i>{% endif %}</td>	
-								<td><a class="link" href="{{path('innobis_admin_observation',{'id':reclamo.id})}}" title="Ver detalles">Ver</a></td>
-							</tr>			
-							{% set count = count + 1 %}
-							{% endif %}
-						{% endfor %}
-						{% for reclamo in resuelto %}	
-							<tr>	
-								<td>{{ count }}</td>
-								<td>{{ reclamo.rut }}</td>
-								<td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td>
-								<td>{{ reclamo.recinto }}</td>
-								<td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td>
-								<td>{% if reclamo.fechaSolucion != NULL and
-								date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
-								<i class="glyphicon glyphicon-ok-sign ok" title="Solucionado"></i>{% else %}
-								<i class="glyphicon glyphicon-time time" title="Pendiente"></i>{% endif %}</td>	
-								<td><a class="link" href="{{path('innobis_admin_observation',{'id':reclamo.id})}}" title="Ver detalles">Ver</a></td>
-							</tr>						
-							{% set count = count + 1 %}
-						{% endfor %}
+						
 						</tbody>
 			     	</table>
 			     	{% else %}
 			     		<h4 class="txtwhite txtshadow">No hay reclamos registrados en nuestra base de datos.</h4>
 			     	{% endif %}
-			     	<button id="myBtn">Try it</button>
-
-<p id="demo"></p>
 			      	<div class="clear2"></div>
 			      	<div class="clear2"></div>
 			    </div>
@@ -74,11 +51,98 @@
 		</div>
 	    {{ parent() }}
 	</body>
-	<script>
-		document.getElementById("myBtn").addEventListener("click", displayDate);
+{% endblock %}
 
-		function displayDate() {
-		    document.getElementById("demo").innerHTML = Date();
-		}
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+			{% set resuelto = [] %}
+			{% set noresuelto = [] %}
+			{% set count = 1 %}
+
+			{% set frecintos = [] %}
+			{% set fviviendas = [] %}
+			{% set fruts = [] %}
+
+			{% for reclamo in reclamos|reverse %}
+				{% if reclamo.fechaSolucion != NULL and
+					date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
+					{% set resuelto = resuelto|merge([reclamo]) %}
+				{% else %}
+					{% set noresuelto = noresuelto|merge([reclamo]) %}
+				{% endif %}
+	
+				{% set break = false %}
+				{% for reci in frecintos if not break %}
+					{% if reci == reclamo.recinto %}
+						{% set break = true %}
+					{% endif %}
+				{% endfor %}
+				
+				{% if not break %}
+					{% set frecintos = frecintos|merge([reclamo.recinto]) %}
+					$("#frecinto").append("<option value={{reclamo.recinto}}>{{reclamo.recinto}}</option>");
+				{% endif %}
+	
+				{% set break = false %}
+				{% for reci in fruts if not break %}
+					{% if reci == reclamo.rut %}
+						{% set break = true %}
+					{% endif %}
+				{% endfor %}
+				
+				{% if not break %}
+					{% set fruts = fruts|merge([reclamo.rut]) %}
+					$("#frut").append("<option value={{reclamo.rut}}>{{reclamo.rut}}</option>");
+				{% endif %}
+	
+				{% set break = false %}
+				{% for reci in fviviendas if not break %}
+					{% if reci == reclamo.departamento+"-"+reclamo.torre %}
+						{% set break = true %}
+					{% endif %}
+				{% endfor %}
+				
+				{% if not break %}
+					{% set fviviendas = fviviendas|merge([reclamo.departamento+"-"+reclamo.torre]) %}
+					$("#fvivienda").append("<option value='{{ reclamo.departamento }}-{{ reclamo.torre }}'>{{ reclamo.departamento }}-{{ reclamo.torre }}</option>");
+				{% endif %}
+			{% endfor %}
+
+			refresh();
+		});
+		$("#frecinto").change(function(){ 
+			refresh();
+		});
+		$("#fvivienda").change(function(){ 
+			refresh();
+		});
+		$("#frut").change(function(){ 
+			refresh();
+		});
+
+	    function refresh(){
+
+	        let frecinto = $("#frecinto option:selected").text();
+	        let fvivienda = $("#fvivienda option:selected").text();
+	        let frut = $("#frut option:selected").text();
+
+		    {% set count = 1 %}
+	        $("#tbody").empty();
+
+	        {% for reclamo in noresuelto %}
+	        	if (("{{reclamo.recinto}}" == frecinto || frecinto == "Todos") && ("{{reclamo.rut}}" == frut || frut == "Todos") && ("{{reclamo.departamento}}-{{reclamo.torre}}" == fvivienda || fvivienda == "Todos")) {
+					$("#tbody").append("<tr><td>{{ count }}</td><td>{{ reclamo.rut }}</td><td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td><td>{{ reclamo.recinto }}</td><td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td><td>{% if reclamo.fechaSolucion != NULL and date('now').diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date('now')).days %}<i class='glyphicon glyphicon-ok-sign ok' title='Solucionado'></i>{% else %}<i class='glyphicon glyphicon-time time' title='Pendiente'></i>{% endif %}</td><td><a class='link' href='{{path('innobis_admin_observation',{'id':reclamo.id})}}' title='Ver detalles' target='_blank'>Ver</a></td></tr>");
+					{% set count = count + 1 %}
+				}
+			{% endfor %}
+	        {% for reclamo in resuelto %}
+	        	if (("{{reclamo.recinto}}" == frecinto || frecinto == "Todos") && ("{{reclamo.rut}}" == frut || frut == "Todos") && ("{{reclamo.departamento}}-{{reclamo.torre}}" == fvivienda || fvivienda == "Todos")) {
+					$("#tbody").append("<tr><td>{{ count }}</td><td>{{ reclamo.rut }}</td><td>{{ reclamo.departamento }}-{{ reclamo.torre }}</td><td>{{ reclamo.recinto }}</td><td>{{ reclamo.fechaReclamo|date('d-m-Y') }}</td><td>{% if reclamo.fechaSolucion != NULL and date('now').diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date('now')).days %}<i class='glyphicon glyphicon-ok-sign ok' title='Solucionado'></i>{% else %}<i class='glyphicon glyphicon-time time' title='Pendiente'></i>{% endif %}</td><td><a class='link' href='{{path('innobis_admin_observation',{'id':reclamo.id})}}' title='Ver detalles' target='_blank'>Ver</a></td></tr>");
+					{% set count = count + 1 %}
+				}
+			{% endfor %}
+		};
 	</script>
 {% endblock %}

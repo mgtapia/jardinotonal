@@ -32,7 +32,7 @@
 				{% set solucionado = reclamo.fechaSolucion != NULL and
 					date("now").diff(date(reclamo.fechaReclamo)).days >= date(reclamo.fechaSolucion).diff(date("now")).days %}
 				<td>{% if solucionado %}{{reclamo.fechaSolucion|date('d-m-Y')}}{% else %}Pendiente{% endif %}</td>				
-				<td>{{ loop.index }}</td>
+				<td>{{ reclamo.lista }}</td>
 				<td>{% if reclamo.gravedad != 0 %}{{ reclamo.gravedad }}{% endif %}</td>
 				<td>{% if solucionado %}{{ date(reclamo.fechaSolucion).diff(date(reclamo.fechaReclamo)).days }}{% else %}
 					{{ date("now").diff(date(reclamo.fechaReclamo)).days }}{% endif %}</td>

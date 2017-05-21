@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-05-2017 a las 20:26:49
+-- Tiempo de generación: 21-05-2017 a las 16:42:51
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -71,6 +71,25 @@ INSERT INTO `clientes` (`id`, `rut`, `nombre`) VALUES
 (32, '9355289-K', 'ANGELA MOVILLO HERMOSILLA'),
 (33, '9441345-1', 'JAIME PIMENTEL SEBALLOS'),
 (34, '9485837-2', 'IGOR SOLIS GATICA');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contador`
+--
+
+CREATE TABLE `contador` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(16) NOT NULL,
+  `contador` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `contador`
+--
+
+INSERT INTO `contador` (`id`, `nombre`, `contador`) VALUES
+(1, 'lista', 8);
 
 -- --------------------------------------------------------
 
@@ -276,7 +295,8 @@ CREATE TABLE `reclamos` (
   `recinto` varchar(255) NOT NULL,
   `detalle` text NOT NULL,
   `categoria` varchar(255) NOT NULL,
-  `responsable` varchar(255) NOT NULL
+  `responsable` varchar(255) NOT NULL,
+  `lista` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -290,16 +310,18 @@ CREATE TABLE `users` (
   `firstname` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `rol` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
-(1, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq'),
-(2, 'Max', 'Villalobos', 'mvillalobos@agenciaout.cl', '$2y$12$gNxKPnjLUI30q3RBdTZlgO//2ZG4UwapGejqZJ9CQXIGA4Uw2waJa');
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `rol`) VALUES
+(1, 'Jardín', 'Otoñal', 'pvjardinotonal@ia.cl', '$2y$12$jlPtAGNKD8if2iW.ChxEHOv5Ab4O1Z76BZ6aXEbMiQN7fHyfH.GfO', 'admin'),
+(2, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq', NULL),
+(3, 'Max', 'Villalobos', 'mvillalobos@agenciaout.cl', '$2y$12$gNxKPnjLUI30q3RBdTZlgO//2ZG4UwapGejqZJ9CQXIGA4Uw2waJa', NULL);
 
 -- --------------------------------------------------------
 
@@ -374,6 +396,12 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `contador`
+--
+ALTER TABLE `contador`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `recinto_vivienda`
 --
 ALTER TABLE `recinto_vivienda`
@@ -407,7 +435,12 @@ ALTER TABLE `viviendas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+--
+-- AUTO_INCREMENT de la tabla `contador`
+--
+ALTER TABLE `contador`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
@@ -417,7 +450,7 @@ ALTER TABLE `reclamos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `viviendas`
 --
