@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-05-2017 a las 16:42:51
+-- Tiempo de generación: 22-05-2017 a las 11:18:06
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -319,7 +319,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `rol`) VALUES
-(1, 'Jardín', 'Otoñal', 'pvjardinotonal@ia.cl', '$2y$12$jlPtAGNKD8if2iW.ChxEHOv5Ab4O1Z76BZ6aXEbMiQN7fHyfH.GfO', 'admin'),
+(1, 'Jardín', 'Otoñal', 'posventajo@ia.cl', '$2y$12$jlPtAGNKD8if2iW.ChxEHOv5Ab4O1Z76BZ6aXEbMiQN7fHyfH.GfO', 'admin'),
 (2, 'Luis', 'Alvarez', 'lalvarez@ia.cl', '$2y$12$L6QhTRjqs.ToLDP8kjAU/uPXNRWDzcLqMH1K46FyyVupx1WJEd4dq', NULL),
 (3, 'Max', 'Villalobos', 'mvillalobos@agenciaout.cl', '$2y$12$gNxKPnjLUI30q3RBdTZlgO//2ZG4UwapGejqZJ9CQXIGA4Uw2waJa', NULL);
 
