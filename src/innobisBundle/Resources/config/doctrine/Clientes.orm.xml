@@ -14,5 +14,15 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="fecha" type="date" column="fecha" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lista" type="integer" column="lista" length="11" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

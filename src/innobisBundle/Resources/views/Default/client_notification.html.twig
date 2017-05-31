@@ -1,0 +1,15 @@
+<div style="background-color:white; color:black; padding:0px 10px">
+	<h4>Notificación:</h4>
+	
+	{% set name = '' %}
+	{% for cliente in clientes %}
+		{% if cliente.rut == rut %}
+			{% set name = cliente.nombre %}
+		{% endif %}
+	{% endfor %}
+
+	<p>El cliente {{ name }}, rut {{ rut }} ha generado una nueva observación.<br/>
+	Para ver más detalles revisa en la <a href="http://jardinotonal.cl/" style="color:#026537">página web</a>, el panel de administración.</p>
+
+	<p>Postventa,<br/>Jardín Otoñal</p>
+</div>

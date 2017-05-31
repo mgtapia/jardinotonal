@@ -57,6 +57,12 @@ class Reclamos
     private $categoria;
 
     /**
+     * @var int
+     *
+     */
+    private $identificador;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_reclamo", type="date")
@@ -271,6 +277,30 @@ class Reclamos
     public function getFechaSolucion()
     {
         return $this->fechaSolucion;
+    }
+
+     /**
+     * Set identificador
+     *
+     * @param integer $identificador
+     *
+     * @return Reclamos
+     */
+    public function setIdentificador($identificador)
+    {
+        $this->identificador = $identificador;
+
+        return $this;
+    }
+
+    /**
+     * Get identificador
+     *
+     * @return integer
+     */
+    public function getIdentificador()
+    {
+        return $this->identificador;
     }
 
     /**

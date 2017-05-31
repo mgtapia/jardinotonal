@@ -20,6 +20,7 @@ class ReclamosType extends AbstractType
             ->add('rut')
             ->add('departamento')
             ->add('torre')
+            ->add('identificador')
             ->add('recinto', ChoiceType::class, array(
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
@@ -27,7 +28,7 @@ class ReclamosType extends AbstractType
                     'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
                     'DORM 2'=>'DORM 2',
                     'DORM 3'=>'DORM 3',
@@ -35,11 +36,12 @@ class ReclamosType extends AbstractType
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',
-                    'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 )
             ))
             ->add('fechaReclamo','date')
@@ -48,20 +50,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -70,20 +75,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -92,20 +100,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -114,20 +125,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -136,20 +150,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -158,20 +175,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -180,20 +200,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -202,20 +225,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -224,20 +250,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -246,20 +275,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -268,20 +300,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -290,20 +325,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -312,20 +350,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -334,20 +375,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -356,20 +400,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -378,20 +425,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -400,20 +450,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -422,20 +475,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 
@@ -444,20 +500,23 @@ class ReclamosType extends AbstractType
                 'placeholder' => 'SELECCIONA UN RECINTO', 'choices' => array(       
                     'BAÑO 1 PPAL'=>'BAÑO 1 PPAL',
                     'BAÑO 2'=>'BAÑO 2',
-                        'BAÑO SERV'=>'BAÑO SERV',
+                    'BAÑO SERV'=>'BAÑO SERV',
                     'BAÑO VISITA'=>'BAÑO VISITA',
                     'COCINA'=>'COCINA',
-                    'COMEDOR'=>'COMEDOR',
+                    'COMEDOR'=>'LIVING COMEDOR',
                     'DORM 1 PPAL'=>'DORM 1 PPAL',
-                    'DORM 2'=>'DORM 2', 'DORM 3'=>'DORM 3',
+                    'DORM 2'=>'DORM 2',
+                    'DORM 3'=>'DORM 3',
                     'DORM SERV'=>'DORM SERV',
                     'ESTAR'=>'ESTAR',
                     'HALL ACCESO'=>'HALL ACCESO',
                     'HOME OFFICE'=>'HOME OFFICE',
-                    'LOGGIA '=>'LOGGIA ',   'TERRAZA 1'=>'TERRAZA 1',
-                    'TERRAZA 2'=>'TERRAZA 2',
-                    'TERRAZA 3'=>'TERRAZA 3',
-                    'W.CL'=>'W.CL'
+                    'LOGGIA'=>'LOGGIA',
+                    'PASILLO'=>'PASILLO',
+                    'TERRAZA 1'=>'TERRAZA LIVING COMEDOR',
+                    'TERRAZA 2'=>'TERRAZA DORM. PPAL',
+                    'TERRAZA 3'=>'TERRAZA',
+                    'W.CL'=>'WALKING CLOSET'
                 ), 'required' => false
             ))
                 

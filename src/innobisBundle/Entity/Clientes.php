@@ -41,6 +41,20 @@ class Clientes
      */
     private $nombre;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="lista", type="integer", length=11)
+     */
+    private $lista;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="date", length=255)
+     */
+    private $fecha;
+
 
     /**
      * Get id
@@ -98,5 +112,53 @@ class Clientes
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set lista
+     *
+     * @param int $lista
+     *
+     * @return Reclamos
+     */
+    public function setLista($lista)
+    {
+        $this->lista = $lista;
+
+        return $this;
+    }
+
+    /**
+     * Get lista
+     *
+     * @return int
+     */
+    public function getLista()
+    {
+        return $this->lista;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     *
+     * @return Reclamos
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
     }
 }

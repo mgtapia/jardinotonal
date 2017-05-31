@@ -62,8 +62,8 @@
 }
 .hh
 {
-    height: 80px !important;
-    max-height: 80px !important;
+    height: 35px !important;
+    max-height: 35px !important;
     resize: none;
 }
 .message-alert

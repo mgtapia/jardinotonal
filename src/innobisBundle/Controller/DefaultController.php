@@ -56,64 +56,74 @@ class DefaultController extends Controller
         $form = $this->observationCreateForm($reclamo);
         $form->handleRequest($request);
         $rut = $form->get('rut')->getData();
+        $id = $form->get('identificador')->getData();
 
         if ($form->isValid())
         {
-            $len = strlen($form->get('detalle')->getData());
-            if ($len <= 80)
+            $lista = $this->getDoctrine()->getRepository('innobisBundle:Contador')->find(1);
+            $cliente = $this->getDoctrine()->getRepository("innobisBundle:Clientes")->find($id);
+            $em=$this->getDoctrine()->getManager();
+
+            if ($cliente->getFecha() && $cliente->getFecha()->format('Y-m-d') == (new \DateTime('now'))->format('Y-m-d'))
             {
-                $lista = $this->getDoctrine()->getRepository('innobisBundle:Contador')->find(1);
+                $contador = $cliente->getLista();
+            }
+            else
+            {
                 $contador = $lista->getContador();
-
-                $reclamo
-                    ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)->setLista($contador)
-                    ->setGravedad("")->setCategoria("")->setObservacion("")->setResponsable("");
-                $em=$this->getDoctrine()->getManager();
-                $em->persist($reclamo);
-                $em->flush();
-
-                $rut = $form->get('rut')->getData();
-                $depto = $form->get('departamento')->getData();
-                $torre = $form->get('torre')->getData();
-
-                for ($i=2; $i <= 20; $i++) 
-                { 
-                    $detalle = $form->get('detalle'.$i)->getData();
-                    $recinto = $form->get('recinto'.$i)->getData();
-
-                    if (strlen($detalle) > 0 && strlen($recinto) > 0)
-                    {
-                        $reclamo = new Reclamos();
-                        $reclamo->setRut($rut)->setDepartamento($depto)->setTorre($torre)
-                            ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)->setLista($contador)
-                            ->setGravedad("")->setCategoria("")->setObservacion("")->setResponsable("")
-                            ->setDetalle($detalle)->setRecinto($recinto);
-                        $em->persist($reclamo);
-                        $em->flush();
-                    }
-                }
-
                 $lista->setContador($contador + 1);
                 $em->persist($lista);
-                $em->flush();
+            
+                $cliente->setFecha(new \DateTime('now'));
+                $cliente->setLista($contador);
+                $em->persist($cliente);
+            }        
 
-                /*$message = \Swift_Message::newInstance()
-                    ->setSubject('Hello Email')
-                    ->setFrom('nombre@mail.cl')
-                    ->setTo('nombre@mail.cl')
-                    ->setBody('hola', 'text/plain')
-                ;
-                $this->get('mailer')->send($message);*/
+            $reclamo
+                ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)->setLista($contador)
+                ->setGravedad("")->setCategoria("")->setObservacion("")->setResponsable("");
+            $em->persist($reclamo);
+            $em->flush();
 
-                $this->addFlash('mensaje','Su observación ha sido enviada');
-                $form = $this->observationCreateForm(new Reclamos());
-            }
-            else {   
-                $this->addFlash('error', 'Su observación excede el máximo de caracteres');
-            }
-        } else {   
-            $this->addFlash('error', 'Su observación excede el máximo de caracteres');
-        }    
+            $rut = $form->get('rut')->getData();
+            $depto = $form->get('departamento')->getData();
+            $torre = $form->get('torre')->getData();
+
+            for ($i=2; $i <= 20; $i++) 
+            { 
+                $detalle = $form->get('detalle'.$i)->getData();
+                $recinto = $form->get('recinto'.$i)->getData();
+
+                if (strlen($detalle) > 0 && strlen($recinto) > 0)
+                {
+                    $reclamo = new Reclamos();
+                    $reclamo->setRut($rut)->setDepartamento($depto)->setTorre($torre)
+                        ->setFechaReclamo(new \DateTime('now'))->setFechaSolucion(NULL)->setLista($contador)
+                        ->setGravedad("")->setCategoria("")->setObservacion("")->setResponsable("")
+                        ->setDetalle($detalle)->setRecinto($recinto);
+                    $em->persist($reclamo);
+                    $em->flush();
+                }
+            }            
+
+            $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', 587)
+              ->setUsername('apikey')->setPassword('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');
+
+            $mailer = \Swift_Mailer::newInstance($transport);
+
+            $message = \Swift_Message::newInstance()
+              ->setSubject('Observación #'.$contador.' - Depto: '.$depto.'-'.$torre)
+              ->setFrom(['posventajo@gmail.com' => 'Jardín Otoñal'])
+              ->setTo(['posventajo@ia.cl' => 'Jardín Otoñal'])
+              ->setBody($this->renderView('innobisBundle:Default:client_notification.html.twig', array(
+                    'rut' => $rut, 'clientes'=>$this->getDoctrine()->getRepository("innobisBundle:Clientes")->findAll()
+                    )),'text/html');
+
+            $result = $mailer->send($message);
+
+            $this->addFlash('mensaje','Su observación ha sido enviada');
+            $form = $this->observationCreateForm(new Reclamos());
+        }   
         
         return $this->render('innobisBundle:Default:client.html.twig', array(
             'id'=>$rut, 'form'=>$form->createView(), 
