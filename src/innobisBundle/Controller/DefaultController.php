@@ -107,7 +107,7 @@ class DefaultController extends Controller
             }            
 
             $transport = \Swift_SmtpTransport::newInstance('smtp.sendgrid.net', 587)
-              ->setUsername('apikey')->setPassword('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');
+              ->setUsername('apikey')->setPassword('~');
 
             $mailer = \Swift_Mailer::newInstance($transport);
 
